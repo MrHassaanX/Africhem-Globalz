@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "../styles/tokens.css";
+@import "../styles/site-shell.css";
 
 :root {
   color-scheme: dark;
