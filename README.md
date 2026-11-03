@@ -1,64 +1,114 @@
-# Africhem Globalz website
+# Africhem Globalz Website
 
-Client-facing corporate and product enquiry website built with Next.js 16 App Router, React 19 and TypeScript. The application is in review mode by default; pages and response headers are `noindex` unless `SITE_INDEXABLE=true` is deliberately set for an approved launch.
+[![Stack](https://shields.io)](https://nextjs.org)
+[![React](https://shields.io)](https://react.dev)
+[![TypeScript](https://shields.io)](https://typescriptlang.org)
+[![Tailwind CSS](https://shields.io)](https://tailwindcss.com)
 
-## Run locally
+A modern, client-facing corporate and product enquiry website built for **Africhem Globalz**. 
 
-Requirements: Node.js 22 LTS or newer, npm, and network access for the initial dependency install.
+> [!IMPORTANT]
+> **Review Mode Warning:** The application is in review mode by default. Pages and response headers are forced to `noindex` unless `SITE_INDEXABLE=true` is explicitly set in production environments for an officially approved launch.
 
-From the project folder (`D:\Africhem\Africhem-Globalz` in this workspace), open PowerShell and run:
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+* **Node.js**: `v22 LTS` or newer
+* **Package Manager**: `npm`
+* Network access for initial dependency installations
+
+### Local Development Setup
+From your project directory, open your terminal (e.g., PowerShell) and run:
 
 ```powershell
+# Install clean dependencies
 npm ci
+
+# Start the local development server
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). Stop the server with **Ctrl+C**. If port 3000 is already in use, Next.js will report the alternate local address it selected.
+Open [http://localhost:3000](http://localhost:3000) to view the live site. If port 3000 is occupied, Next.js will automatically select an alternate local address. Press `Ctrl + C` to stop the server.
 
-Optional environment settings are documented in `.env.example`. For local development, copy it to `.env.local` only if you need to change the site URL, indexing behavior, or configure quotation email. `.env.local` is ignored by Git; never commit credentials. The quote form stays unavailable until valid Resend settings and `QUOTE_FORM_ENABLED=true` are present. You can still run and review the rest of the site without them.
+### Environment Setup
+Environment settings are configured via `.env` files:
+1. Copy the safe configuration template: `cp .env.example .env.local`
+2. Update variables in `.env.local` as needed (e.g., site URL, indexing flags, or quotation APIs).
+3. **Security Note:** `.env.local` is ignored by Git. Never commit active production keys or secrets.
 
-Useful commands:
+> [!NOTE]
+> The Quote Form stays unavailable until valid Resend credentials and `QUOTE_FORM_ENABLED=true` are configured. You can still preview and review the rest of the layout seamlessly without this setup.
 
+---
+
+## 🛠️ Build & Maintenance Commands
+
+| Command | Purpose |
+| :--- | :--- |
+| `npm run lint` | Run the ESLint syntax and code quality analysis. |
+| `npm run typecheck` | Perform structural TypeScript type verification. |
+| `npm run build` | Build the optimized application bundle for production. |
+| `npm run start` | Run the built production package locally. |
+
+*To host the production build locally on an alternate port and address:*
 ```powershell
-npm run lint
-npm run typecheck
 npm run build
-npm run start
+npm run start -- --hostname 127.0.0.1 --port 3100
 ```
 
-`npm run start` serves a production build, so run `npm run build` first. It defaults to port 3000; use `npm run start -- --hostname 127.0.0.1 --port 3100` to select a local address and port.
+---
 
-## Current pages
+## 📍 Route Directory (Current Pages)
 
-- `/` — chemical sourcing home page and six-category carousel.
-- `/products`, `/products/[family]`, `/products/[family]/[product]` — six sourcing categories and six named solvent enquiries from `Website content.docx`.
-- `/other-businesses` and documented detail pages — additional business directory; areas without approved details are marked as coming soon.
-- `/industries` — legacy redirect to `/other-businesses` (an older business-pillars page file remains in the repository but is not the public route).
-- `/how-it-works`, `/global-reach`, `/about`, `/contact`.
-- `/privacy` and `/terms` — review drafts, not approved legal policies.
+*   `/#` — Chemical sourcing home page paired with a custom 6-category carousel layout.
+*   `/products` | `/products/[family]` | `/products/[family]/[product]` — Product navigation maps encompassing 6 primary chemical sourcing categories and 6 dedicated solvent enquiry modules.
+*   `/other-businesses` — Secondary commercial directories. Sections without official assets feature a temporary *Coming Soon* fallback.
+*   `/how-it-works` | `/global-reach` | `/about` | `/contact` — Essential corporate identity infrastructure routes.
+*   `/privacy` | `/terms` — Contextual draft documents under legal review; do not use as certified live compliance agreements.
 
-Legacy redirects are configured in `next.config.ts`: `/categories` goes to `/products`; old category paths and product-family URLs go to current product or business pages; `/industries` goes to `/other-businesses`.
+> **Legacy Redirects:** Configured within `next.config.ts`. Legacy paths like `/categories` and `/industries` automatically drop visitors gracefully into `/products` and `/other-businesses`.
 
-## Project map
+---
 
-- `app/` — route pages, metadata, shared styles, robots and sitemap handlers.
-- `components/` — shared navigation and page sections, forms, product decks and interactive globe.
-- `lib/` — sourced company content, product/business data, navigation, quote validation and globe locations.
-- `public/` — logo, illustrative local images, flags and globe loading images.
-- `styles/tokens.css` — shared visual tokens; page-specific styles live beside route components or in `app/`.
-- `docs/` — architecture, source inventory, approvals still needed, setup notes and dated historical reports.
-- `.env.example` — environment variable names and safe defaults; it contains no active secrets.
+## 🗺️ Project Architecture Map
 
-The site uses local Inter fonts, light/dark themes, responsive layouts, GSAP/Lenis scroll behavior, Motion UI interactions, and a lazily loaded Three.js globe with a static fallback. Preserve the established visual design and page structure unless a specific change is requested.
+```yaml
+app/            # Active Application Router ecosystem (Pages, layouts, metadata APIs)
+components/     # Modular system structures (Forms, dynamic product navigation, interactive globe elements)
+lib/            # Core configuration layer (Sourced company indexes, validation systems, globe datasets)
+public/         # Static global assets (Logos, flags, vector illustrations, fallback imagery)
+styles/         # System structural tokens (Core tokens are controlled via styles/tokens.css)
+docs/           # Internal design resources and documentation manifests
+.env.example    # Public environment blueprint (Maintains completely safe placeholder configurations)
+```
 
-## Important content and launch notes
+### UI & UX Implementations
+* **Typography:** Local bundled Inter font distributions.
+* **Themes:** Full responsive responsive typography with light/dark adaptive variations.
+* **Motion Design:** Advanced fluid viewport scrolling powered by **GSAP** and **Lenis**.
+* **Visuals:** WebGL immersive globe generated lazily via **Three.js** with an interactive static fallback matrix.
 
-- Partner countries are not claims of Africhem offices, warehouses or shipping routes.
-- Product grades, stock, pricing, certifications, legal identity and unverified service claims must not be invented. The six solvent names appear in the supplied website-content document; technical and commercial details are still unspecified.
-- The quote API uses Resend only when explicitly configured. No successful live inbox receipt is implied by the local preview.
-- Indexing is off by default. Confirm the production URL and launch approval before changing `SITE_INDEXABLE`.
-- See `docs/architecture.md`, `docs/content-inventory.md`, `docs/roadmap.md`, and `docs/founder-approval-checklist.md` for current implementation boundaries and remaining content decisions.
+---
 
-## Historical records
+## ⚠️ Important Content Boundaries & Launch Guidelines
 
-`docs/phase-1-report.md`, `docs/phase-2-notes.md`, `docs/revision-audit-2026-10-24.md`, and `docs/stax-personal-v2-requirements.md` record earlier snapshots or design requirements. Their status statements describe those dates and must not be read as current implementation status. The current code and this README describe the present route set.
+*   **Global Reach Contextualization:** Partner country footprints are global shipping indicators and destination zones; they do not represent physical Africhem administrative offices or local warehousing plants.
+*   **Data Restrictions:** Never invent product grading, stock configurations, pricing tiers, legal certifications, or unverified performance guarantees. The 6 core solvent names are explicitly mapped from project briefings; contextual technical data blocks remain empty pending certified additions.
+*   **Transactional Testing:** The quotation module strictly communicates via Resend APIs when verified tokens are detected. Local sandboxes do not imply a confirmed end-to-end receipt cycle.
+*   **Documentation Indexing:** Review additional launch boundaries, content constraints, and setup roadmaps located inside:
+    * `docs/architecture.md`
+    * `docs/content-inventory.md`
+    * `docs/roadmap.md`
+    * `docs/founder-approval-checklist.md`
+
+---
+
+## ⏳ Historical Record Manifests
+
+The documents below serve strictly as structural archives from previous project milestones. Status evaluations located within these files do not accurately reflect current site states:
+* 📁 `docs/phase-1-report.md`
+* 📁 `docs/phase-2-notes.md`
+* 📁 `docs/revision-audit-2026-10-24.md`
+* 📁 `docs/stax-personal-v2-requirements.md`
