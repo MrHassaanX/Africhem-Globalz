@@ -5,7 +5,6 @@
 ![TypeScript](https://shields.io)
 ![Tailwind CSS](https://shields.io)
 
-
 A modern, client-facing corporate and product enquiry website built for **Africhem Globalz**. 
 
 > [!IMPORTANT]
