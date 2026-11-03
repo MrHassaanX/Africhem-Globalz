@@ -11,13 +11,26 @@ const number = (value: number) => String(value).padStart(2, "0");
 type Position = "center" | "left" | "right" | "far";
 
 export function ChemicalCarousel({ label = "Chemical families" }: { label?: string }) {
+  const root = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
+  const [entered, setEntered] = useState(false);
   const pointerStart = useRef<{ x: number; y: number } | null>(null);
   const suppressClickUntil = useRef(0);
   const focusAfterSelection = useRef(false);
   const selectedLink = useRef<HTMLAnchorElement>(null);
   const count = chemicalFamilies.length;
   const move = (step: number) => setActive(current => (current + step + count) % count);
+  useEffect(() => {
+    const element = root.current;
+    if (!element) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      setEntered(true);
+      observer.disconnect();
+    }, { rootMargin: "120px" });
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
   useEffect(() => { if (focusAfterSelection.current) { selectedLink.current?.focus(); focusAfterSelection.current = false; } }, [active]);
   function position(index: number): Position {
     const distance = (index - active + count) % count;
@@ -38,7 +51,7 @@ export function ChemicalCarousel({ label = "Chemical families" }: { label?: stri
       move(dx < 0 ? 1 : -1);
     }
   }
-  return <div className="category-carousel chemical-carousel" role="region" aria-roledescription="carousel" aria-label={label}
+  return <div ref={root} className={`category-carousel chemical-carousel${entered ? " is-entered" : ""}`} role="region" aria-roledescription="carousel" aria-label={label}
     onKeyDown={event => {
       if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
         event.preventDefault();
@@ -65,6 +78,6 @@ export function ChemicalCarousel({ label = "Chemical families" }: { label?: stri
       })}
     </div>
     <div className="category-carousel-controls"><div className="category-carousel-progress" aria-live="polite" aria-atomic="true"><span className="category-carousel-count">{number(active + 1)} <span>/ {number(count)}</span></span><span className="category-carousel-active-name">{chemicalFamilies[active].name}</span></div><div className="category-carousel-buttons"><button type="button" onClick={() => move(-1)} aria-label="Previous family">←</button><button type="button" onClick={() => move(1)} aria-label="Next family">→</button></div></div>
-    <nav className="chemical-carousel-overview" aria-label="All five chemical families"><ol>{chemicalFamilies.map((family, index) => <li key={family.slug}><Link href={`/products/${family.slug}`}><span>{number(index + 1)}</span>{family.name}</Link></li>)}</ol></nav>
+    <nav className="chemical-carousel-overview" aria-label="All six chemical sourcing categories"><ol>{chemicalFamilies.map((family, index) => <li key={family.slug}><Link href={`/products/${family.slug}`}><span>{number(index + 1)}</span>{family.name}</Link></li>)}</ol></nav>
   </div>;
 }

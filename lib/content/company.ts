@@ -16,7 +16,7 @@ export const clientContent = {
     { title: "Direct manufacturer access", description: "Tier-1 manufacturers who trust us with their volumes." },
     { title: "Reliable lead times", description: "Planned against your demand and deadline. Any risk is flagged early." },
     { title: "Consistent quality", description: "Specifications and COAs checked before cargo ships." },
-    { title: "Support at every stage", description: "Partners in seven countries answer your queries, wherever your cargo is." },
+    { title: "Support at every stage", description: "Business relationships across six international markets support sourcing and trade conversations." },
   ],
   clientFirst: "Client-First. When your interests and ours differ, yours decide.",
   process: [
@@ -26,12 +26,12 @@ export const clientContent = {
   ],
   network: {
     primaryCountry: "India",
-    countries: ["Kuwait", "UAE", "China", "Algeria", "Egypt", "Uganda", "Kenya"],
-    overview: "India, with partners on the ground in Kuwait, UAE, China, Algeria, Egypt, Uganda and Kenya.",
-    summary: "Partners on the ground in Kuwait, UAE, China, Algeria, Egypt, Uganda and Kenya.",
+    countries: ["Kenya", "Uganda", "UAE", "Kuwait", "Egypt", "United Kingdom"],
+    overview: "India is our primary operating base, complemented by business relationships across six international partner markets.",
+    summary: "India, Kenya, Uganda, UAE, Kuwait, Egypt and the United Kingdom.",
     support: "For any query, at any stage, there is a real person to ask.",
     detail: "You are never left chasing answers across time zones, because international trade runs on someone being there.",
-    relationship: "partners on the ground",
+    relationship: "business relationships",
   },
   pillars: [
     { title: "Chemicals", description: "Solvents for paints and coatings: White Spirit and Thinner." },
@@ -42,14 +42,15 @@ export const clientContent = {
   chemicalFocus: {
     context: ["Chemical export", "Petrochemicals", "Solvents", "Drum filling"],
     application: "Solvents for paints and coatings",
-    namedMaterials: ["White Spirit", "Thinner"],
+    namedMaterials: ["Acetone", "IPA", "Methanol", "Ethyl Acetate", "White Spirit", "Thinner"],
   },
   values: [
     { title: "Trust", description: "We build the communication bridge first." },
     { title: "Commitment", description: "We stay on every order until it is delivered." },
-    { title: "Authenticity", description: "We say what we can do, and what we can't." },
-    { title: "Clarity", description: "Simple steps, plain answers." },
-    { title: "Transparency", description: "You see the status, the timeline and the risk." },
+    { title: "Client Satisfaction", description: "Success is measured by the value we create for our clients." },
+    { title: "Transparency", description: "Clear communication, honest expectations and no surprises." },
+    { title: "Accountability", description: "We take ownership of conversations, commitments and outcomes." },
+    { title: "Problem Solving", description: "We work to help clients solve business challenges." },
   ],
   testimonials: { status: "AWAITING CLIENT CONTENT" },
   contact: {

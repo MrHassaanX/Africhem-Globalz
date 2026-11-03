@@ -4,18 +4,18 @@ Updated 3 November 2026 against the current source tree. This is an internal sou
 
 ## Current implementation snapshot
 
-- `/` is the chemical-first Home page with buyer steps, the five-family carousel, a secondary business preview and quotation links.
-- `/products`, `/products/[family]` and `/products/[family]/[product]` implement the chemical catalogue. White Spirit and Thinner are the only named chemical products.
-- `/about`, `/industries`, `/other-businesses`, `/other-businesses/[slug]`, `/how-it-works`, `/global-reach` and `/contact` are implemented routes. `/industries` presents the four Business Pillars.
+- `/` is the chemical-first Home page with a six-category carousel, four buyer steps, a secondary business preview and quotation links.
+- `/products`, `/products/[family]` and `/products/[family]/[product]` implement six sourcing categories and six named solvent enquiries from the current Website content brief.
+- `/about`, `/other-businesses`, `/other-businesses/[slug]`, `/how-it-works`, `/global-reach` and `/contact` are current public routes. `/industries` redirects to `/other-businesses`.
 - `/contact` has direct channels and a validated quote form/API. Email transport is disabled unless the Resend environment values and `QUOTE_FORM_ENABLED=true` are present; no live delivery is asserted.
 - `/privacy` and `/terms` are review drafts. Preview builds remain `noindex` by default.
-- `/categories` and its old category paths redirect to current canonical destinations. `/industries` itself is not redirected.
+- `/categories`, its old category paths and retired product-family paths redirect to current canonical destinations.
 
 Implementation does not mean all business facts are complete or approved for launch. Unknown specifications, prices, product availability, partner responsibilities, legal details and testimonials remain unpublished. The partner countries do not imply Africhem offices or shipping lanes.
 
 ## Client-supplied About Us document
 
-**Current content authority:** [`docs/source/Africhem_Globalz_About_Us.docx`](source/Africhem_Globalz_About_Us.docx), supplied by the client on 8 October 2026. The complete document was checked, including its five tables, header and footer. Its company descriptions, values, partner countries, business pillars and contact details take precedence over the earlier archive when they differ. The archive inventory below remains a historical implementation reference, not an equally current content source. This document does not itself authorize publication of testimonials, establish office locations, or verify legal entity details.
+**Source documents:** [`docs/source/Africhem_Globalz_About_Us.docx`](source/Africhem_Globalz_About_Us.docx) is the client-supplied company profile (8 October 2026). `C:\Users\khanz\OneDrive\Desktop\Website content.docx` is the newer display-copy brief supplied for the 3 November 2026 changes. Where they conflict, the latest brief now controls the revised page copy, product names and displayed market list; this does not independently verify those commercial claims or prove legal facts. The archive inventory below remains historical. Neither document supplies approved partner logos, a founder photograph or a named client testimonial.
 
 ### About hero and story
 
@@ -83,7 +83,7 @@ The client document supplies content, not a working form or email backend. The c
 
 ### Content use in the current implementation
 
-`lib/content/company.ts` stores reusable client wording used by Home, About, Business Pillars and Global Reach. Product and business details are represented in typed data files. The current About page and quote form/API are implemented, but the form's email transport is conditional on private configuration and a live receipt has not been established by this inventory. The Global Reach page displays India and seven partner countries. Do not represent these as Africhem offices, warehouses or confirmed shipping routes.
+`lib/content/company.ts` stores reusable company content. The current display brief adds Acetone, IPA, Methanol and Ethyl Acetate alongside White Spirit and Thinner, and lists India, Kenya, Uganda, UAE, Kuwait, Egypt and the United Kingdom. Product grades, availability, specifications and documents remain unspecified. The Global Reach page describes business relationships, not verified Africhem offices or shipping routes. The quote form/API is implemented, but live email transport requires private configuration and a confirmed receipt.
 
 ## Earlier archive inventory
 

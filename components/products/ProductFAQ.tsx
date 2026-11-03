@@ -1,4 +1,5 @@
 const questions = [
+  ["Do I need to know the exact specification before contacting you?", "No. Many sourcing conversations begin with a product application, intended use or previous product reference. If you're still evaluating options, our team can help identify the information needed before moving forward."],
   ["What information is needed for a quote?", "Please share the material or product, grade or specification if known, quantity and unit, destination, and any required date or documents."],
   ["How are product specifications and COA documents checked?", "Send us the specification and document requirements. We can discuss what information is available for a proposed source before you commit to an order; a universal COA-checking policy is not yet published."],
   ["What shipping and trade documents can be provided?", "Document availability depends on the material, source and destination. Please list the documents you require in your enquiry so the team can confirm them for that quotation."],

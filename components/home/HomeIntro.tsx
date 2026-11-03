@@ -73,15 +73,17 @@ export function HomeIntro({ children }: { children: React.ReactNode }) {
     </div>
     <section className="home-hero" aria-labelledby="home-title">
       <div className="home-hero-copy">
-        <p className="home-hero-eyebrow">AFRICHEM GLOBALZ <span> / INDUSTRIAL CHEMICALS</span></p>
+        <p className="home-hero-eyebrow">AFRICHEM GLOBALZ <span> / INTERNATIONAL SOURCING</span></p>
         <h1 id="home-title">
-          <span className="home-line"><span>Industrial chemicals, </span></span>
-          <span className="home-line home-line-accent"><span>sourced, verified </span></span>
-          <span className="home-line"><span>and shipped to your port.</span></span>
+          <span className="home-line"><span>You Need</span></span>
+          <span className="home-line home-line-accent"><span>Chemicals.</span></span>
+          <span className="home-line"><span>We Handle</span></span>
+          <span className="home-line home-line-accent"><span>Everything</span></span>
+          <span className="home-line"><span>Else.</span></span>
         </h1>
         <p className="home-tagline">SOURCING SIMPLIFIED.</p>
-        <p className="home-hero-support">Tell us the material, specification, quantity and destination. We coordinate the sourcing conversation, available documents and delivery requirements before quoting.</p>
-        <div className="home-hero-actions"><QuoteLink /><Link className="home-secondary-link" href="/how-it-works">See How It Works <span aria-hidden="true">→</span></Link></div>
+        <p className="home-hero-support">International sourcing involves more than finding a supplier. Africhem Globalz helps buyers navigate specifications, supplier verification, documentation and delivery through a single point of contact—from enquiry to shipment.</p>
+        <div className="home-hero-actions"><QuoteLink label="Request Pricing" /><Link className="home-secondary-link" href="/how-it-works">See How It Works <span aria-hidden="true">→</span></Link></div>
       </div>
       <div className="home-hero-visual-space" aria-hidden="true" />
     </section>

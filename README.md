@@ -30,14 +30,14 @@ npm run start
 
 ## Current pages
 
-- `/` — chemical sourcing home page and five-family carousel.
-- `/products`, `/products/[family]`, `/products/[family]/[product]` — five chemical families; White Spirit and Thinner are the only named chemical products in the client source.
+- `/` — chemical sourcing home page and six-category carousel.
+- `/products`, `/products/[family]`, `/products/[family]/[product]` — six sourcing categories and six named solvent enquiries from `Website content.docx`.
 - `/other-businesses` and documented detail pages — additional business directory; areas without approved details are marked as coming soon.
-- `/industries` — business pillars page (its displayed heading is “Business Pillars”).
+- `/industries` — legacy redirect to `/other-businesses` (an older business-pillars page file remains in the repository but is not the public route).
 - `/how-it-works`, `/global-reach`, `/about`, `/contact`.
 - `/privacy` and `/terms` — review drafts, not approved legal policies.
 
-Legacy redirects are configured in `next.config.ts`: `/categories` goes to `/products`; old category paths go to their current product or business pages; `/industries` remains the current business pillars route (it is not redirected).
+Legacy redirects are configured in `next.config.ts`: `/categories` goes to `/products`; old category paths and product-family URLs go to current product or business pages; `/industries` goes to `/other-businesses`.
 
 ## Project map
 
@@ -54,7 +54,7 @@ The site uses local Inter fonts, light/dark themes, responsive layouts, GSAP/Len
 ## Important content and launch notes
 
 - Partner countries are not claims of Africhem offices, warehouses or shipping routes.
-- Product grades, stock, pricing, certifications, legal identity and unverified service claims must not be invented.
+- Product grades, stock, pricing, certifications, legal identity and unverified service claims must not be invented. The six solvent names appear in the supplied website-content document; technical and commercial details are still unspecified.
 - The quote API uses Resend only when explicitly configured. No successful live inbox receipt is implied by the local preview.
 - Indexing is off by default. Confirm the production URL and launch approval before changing `SITE_INDEXABLE`.
 - See `docs/architecture.md`, `docs/content-inventory.md`, `docs/roadmap.md`, and `docs/founder-approval-checklist.md` for current implementation boundaries and remaining content decisions.
