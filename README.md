@@ -1,9 +1,10 @@
 # Africhem Globalz Website
 
-[![Stack](https://shields.io)](https://nextjs.org)
-[![React](https://shields.io)](https://react.dev)
-[![TypeScript](https://shields.io)](https://typescriptlang.org)
-[![Tailwind CSS](https://shields.io)](https://tailwindcss.com)
+![Next.js](https://shields.io)
+![React](https://shields.io)
+![TypeScript](https://shields.io)
+![Tailwind CSS](https://shields.io)
+
 
 A modern, client-facing corporate and product enquiry website built for **Africhem Globalz**. 
 
