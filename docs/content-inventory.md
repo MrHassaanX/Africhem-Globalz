@@ -1,10 +1,21 @@
 # Africhem Globalz content inventory
 
-Updated 8 October 2026 for the Phase 2 correction pass. This is an internal source inventory, not publication approval.
+Updated 3 November 2026 against the current source tree. This is an internal source inventory, not publication approval. The archive analysis below records what was known at earlier dates; for present routes and status, see `README.md` and `docs/roadmap.md`.
+
+## Current implementation snapshot
+
+- `/` is the chemical-first Home page with a six-category carousel, four buyer steps, a secondary business preview and quotation links.
+- `/products`, `/products/[family]` and `/products/[family]/[product]` implement six sourcing categories and six named solvent enquiries from the current Website content brief.
+- `/about`, `/other-businesses`, `/other-businesses/[slug]`, `/how-it-works`, `/global-reach` and `/contact` are current public routes. `/industries` redirects to `/other-businesses`.
+- `/contact` has direct channels and a validated quote form/API. Email transport is disabled unless the Resend environment values and `QUOTE_FORM_ENABLED=true` are present; no live delivery is asserted.
+- `/privacy` and `/terms` are review drafts. Preview builds remain `noindex` by default.
+- `/categories`, its old category paths and retired product-family paths redirect to current canonical destinations.
+
+Implementation does not mean all business facts are complete or approved for launch. Unknown specifications, prices, product availability, partner responsibilities, legal details and testimonials remain unpublished. The partner countries do not imply Africhem offices or shipping lanes.
 
 ## Client-supplied About Us document
 
-**Current content authority:** [`docs/source/Africhem_Globalz_About_Us.docx`](source/Africhem_Globalz_About_Us.docx), supplied by the client on 8 October 2026. The complete document was checked, including its five tables, header and footer. Its company descriptions, values, partner countries, business pillars and contact details take precedence over the earlier archive when they differ. The archive inventory below remains a historical implementation reference, not an equally current content source. This document does not itself authorize publication of testimonials, establish office locations, or verify legal entity details.
+**Source documents:** [`docs/source/Africhem_Globalz_About_Us.docx`](source/Africhem_Globalz_About_Us.docx) is the client-supplied company profile (8 October 2026). `C:\Users\khanz\OneDrive\Desktop\Website content.docx` is the newer display-copy brief supplied for the 3 November 2026 changes. Where they conflict, the latest brief now controls the revised page copy, product names and displayed market list; this does not independently verify those commercial claims or prove legal facts. The archive inventory below remains historical. Neither document supplies approved partner logos, a founder photograph or a named client testimonial.
 
 ### About hero and story
 
@@ -68,11 +79,11 @@ The source file has a corrupted replacement character in “can’t”; the apos
 - Phone: `+91-6362830638`
 - The source header reads “AFRICHEM GLOBALZ — SOURCING SIMPLIFIED”. The contact details are in its footer.
 
-Contact form and email delivery remain deferred to the final implementation phase; this document supplies content, not a working backend.
+The client document supplies content, not a working form or email backend. The current project has a quote form and API; live email transport still requires the approved private configuration described in `docs/quote-delivery-setup.md`.
 
-### Phase 2.5 implementation use
+### Content use in the current implementation
 
-`lib/content/company.ts` stores the client wording as typed reusable data for later About, Industries, Business Pillars and Global Reach work. The current Home uses the supplied promise and delivery line in the hero, the exact Plan/Source/Deliver process in its editorial section, and the confirmed solvents in its Products teaser. Home no longer duplicates Global Reach. The supporting Global Reach foundation route uses the seven partner countries and network wording. The abstract bond detail does not claim a named molecule. The full About page and Contact backend are not implemented.
+`lib/content/company.ts` stores reusable company content. The current display brief adds Acetone, IPA, Methanol and Ethyl Acetate alongside White Spirit and Thinner, and lists India, Kenya, Uganda, UAE, Kuwait, Egypt and the United Kingdom. Product grades, availability, specifications and documents remain unspecified. The Global Reach page describes business relationships, not verified Africhem offices or shipping routes. The quote form/API is implemented, but live email transport requires private configuration and a confirmed receipt.
 
 ## Earlier archive inventory
 
@@ -112,7 +123,7 @@ Other archived About wording to consider during Phase 4:
 
 ## Route and page inventory
 
-Current implementation note (16 October 2026): product browsing now lives under `/categories` and `/categories/[slug]`. The legacy `/products` URL permanently redirects to `/categories`. The table below records the earlier archive plan for provenance and is not the current public navigation.
+Historical archive route plan. The table below records the earlier archive plan for provenance and is not the current public navigation; see the current implementation snapshot above.
 
 | New route | New page role | Archived reference |
 | --- | --- | --- |
@@ -198,7 +209,7 @@ The supplied Ascend prompt illustrates atmospheric depth, restrained bloom, laye
 
 The brief describes the supplied video as a physical stack of large cards with one readable active card, upcoming cards behind it and smooth vertical scroll progression. That supports a future editorial product presentation, not an ordinary carousel. This inventory uses the supplied written description; it does not claim a frame-by-frame video review.
 
-Those principles informed the Phase 2 Home material visual and product teaser. The full catalogue and geographically accurate globe remain later approved work; this correction pass does not start them.
+Those principles informed later visual work. The current Products catalogue and interactive Global Reach globe are implemented; this historical visual-reference section is not a status report.
 
 ## Outstanding content decisions
 

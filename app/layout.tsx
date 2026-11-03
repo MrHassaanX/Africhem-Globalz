@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Intro, introScript } from "@/components/Intro";
 import { Providers } from "@/components/Providers";
+import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { company, indexable, siteUrl } from "@/lib/site";
 import "./globals.css";
 import "./revision-pages.css";
@@ -20,6 +21,6 @@ export const viewport: Viewport = { width: "device-width", initialScale: 1, them
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return <html lang="en" className={inter.variable + " " + display.variable} suppressHydrationWarning>
     <head><script dangerouslySetInnerHTML={{ __html: introScript }} /></head>
-    <body><a className="skip-link" href="#main">Skip to content</a><Providers><Header /><main id="main" tabIndex={-1}>{children}</main><Footer /></Providers><Intro /></body>
+    <body><a className="skip-link" href="#main">Skip to content</a><Providers><Header /><main id="main" tabIndex={-1}>{children}</main><Footer /><FloatingWhatsApp /></Providers><Intro /></body>
   </html>;
 }

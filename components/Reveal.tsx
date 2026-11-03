@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
-export function Reveal({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+export function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const scope = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const element = scope.current;
@@ -16,13 +16,13 @@ export function Reveal({ children, className = "" }: { children: React.ReactNode
         gsap.registerPlugin(ScrollTrigger);
         const mm = gsap.matchMedia();
         mm.add("(prefers-reduced-motion: no-preference)", () => {
-          gsap.fromTo(element, { y: 24 }, { y: 0, duration: .8, ease: "power3.out", scrollTrigger: { trigger: element, start: "top 95%", once: true } });
+          gsap.fromTo(element, { y: 24, opacity: 0 }, { y: 0, opacity: 1, delay, duration: .8, ease: "power3.out", scrollTrigger: { trigger: element, start: "top 95%", once: true } });
         });
         cleanup = () => mm.revert();
       } catch { /* Server HTML is always visible. */ }
     }, { rootMargin: "100px" });
     observer.observe(element);
     return () => { gone = true; observer.disconnect(); cleanup?.(); };
-  }, []);
+  }, [delay]);
   return <div ref={scope} className={className}>{children}</div>;
 }

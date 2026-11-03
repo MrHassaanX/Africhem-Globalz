@@ -1,4 +1,4 @@
-.products-page { background: var(--paper); color: var(--ink); }
+.products-page { overflow-x: clip; background: var(--paper); color: var(--ink); }
 .products-page h1, .products-page h2, .products-page p { margin-top: 0; }
 .products-label, .products-topline { font-size: 11px; font-weight: 600; letter-spacing: .11em; line-height: 1.5; }
 .products-label { margin: 0; color: var(--cyan); }

@@ -1,11 +1,8 @@
 export const otherBusinesses = [
-  { slug: "agro", name: "Agro", description: "Roses and pineapples exported direct from Uganda.", image: "/stock/pineapple-logistics.webp", status: "documented" },
-  { slug: "footwear", name: "Footwear", description: "Walkmate distribution in Mysore, Karnataka.", image: "/stock/footwear-making.webp", status: "documented" },
-  { slug: "freight-forwarding-and-logistics", name: "Freight Forwarding & Logistics", description: null, image: null, status: "awaiting-details" },
-  { slug: "scrap-recycling", name: "Scrap Recycling", description: "A growing division focused on keeping material in use.", image: "/stock/metal-recycling.webp", status: "documented" },
-  { slug: "construction", name: "Construction", description: null, image: null, status: "awaiting-details" },
-  { slug: "cctv-installation", name: "CCTV Installation", description: null, image: null, status: "awaiting-details" },
-  { slug: "social-media", name: "Social Media", description: null, image: null, status: "awaiting-details" },
-  { slug: "rc-toys", name: "RC Toys", description: null, image: null, status: "awaiting-details" },
+  { slug: "chemicals", name: "Industrial Chemicals", description: "Our primary business. Supporting manufacturers, traders and industrial buyers with sourcing, supplier coordination, documentation support and international delivery requirements.", features: ["Verified Supply Network", "Documentation Guidance", "Global Trade Support", "Dedicated Point of Contact"], image: "/stock/industrial-refinery.webp", status: "documented" },
+  { slug: "footwear", name: "Walkmate Footwear Distribution", description: "Authorized Distribution Partner. Supporting regional distribution and market development for Walkmate footwear products across our operating territory, with a focus on product availability, retail relationships and customer service.", features: ["Authorized Distribution", "Retail Partner Support", "Product Availability", "Market Development"], image: "/stock/footwear-making.webp", status: "documented" },
+  { slug: "agro", name: "Agro Commodities", description: "Agricultural trade and sourcing opportunities through producer and supply-chain relationships. Current documented focus areas include roses and pineapples exported direct from Uganda.", features: ["Export Opportunities", "Origin Sourcing", "Supply Coordination", "International Trade Support"], image: "/stock/pineapple-logistics.webp", status: "documented" },
+  { slug: "freight-forwarding-and-logistics", name: "Freight Forwarding & Logistics", description: "Shipment coordination, freight solutions and supply-chain support for buyers and exporters.", features: ["Shipment Coordination", "Freight Support", "Export Documentation", "Supply Chain Assistance"], image: "/stock/port-logistics.webp", status: "documented" },
+  { slug: "scrap-recycling", name: "Scrap & Recycling", description: "Developing opportunities in material recovery, recycling and sustainable trade through industrial partnerships.", features: ["Resource Recovery", "Sustainable Trade", "Industrial Partnerships", "Supply Chain Development"], image: "/stock/metal-recycling.webp", status: "documented" },
 ] as const;
 export const getBusiness = (slug: string) => otherBusinesses.find(item => item.slug === slug);

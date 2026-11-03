@@ -1,5 +1,7 @@
 # Phase 0 + Phase 1 report — 7 October 2026
 
+**Historical baseline.** This report documents the repository at the end of Phase 1 on 7 October 2026. Its statements that later pages/features were not implemented and its Phase 2 recommendation are accurate only for that snapshot. Current routes, run instructions and implementation status are in `README.md`, `architecture.md` and `roadmap.md`.
+
 ## 1. Old repository content inventory
 
 See content-inventory.md. Inspected archive/current-website at fb6024c3773a85a675a5429eb1e4a5e14c9b6be5. Confirmed usable brand, tagline, business terminology and sales@africhem-globalz.com. Catalogue data is placeholder-only; industry sectors are explicitly provisional. No unsupported product specifications, offices, statistics or certifications were migrated. The archive's unconfirmed “Private Limited” suffix and outdated enquiry/privacy wording are flagged.

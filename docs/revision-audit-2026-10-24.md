@@ -1,5 +1,7 @@
 # Revision audit — 24 October 2026
 
+**Dated audit snapshot.** This is the record of a review performed on 24 October 2026, not a live status page. Refer to `README.md` and `roadmap.md` for current routes and remaining work; later changes may supersede individual observations below.
+
 Source: `Africhem_Globalz_Outstanding_Changes_Audit_24_Oct_2026.pdf` (12 pages), checked against this local working tree before edits. The PDF's status labels describe an earlier inventory, not proof of the current site. Baseline: `main` at `4ad40f0`; `next-env.d.ts` was already modified by Next dev. No other pre-existing local changes. No commit, push, deployment or indexing is authorized.
 
 Status key: **done** = locally implemented and verified; **partial** = local architecture exists but founder data, approval, provider configuration or real-device QA remains; **deferred** = conditional item not approved. Verification and after-state are recorded below and in the final QA note.

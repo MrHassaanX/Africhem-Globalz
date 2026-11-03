@@ -1,11 +1,14 @@
 .about-client-first { padding-block: clamp(45px, 5vw, 75px); background: var(--surface-navy); color: #f7f9fb; max-width: none; padding-inline: max(var(--gutter), calc((100vw - var(--content)) / 2 + var(--gutter))); }
 .about-client-first .revision-kicker { color: #8fd3df; }
 .about-client-first blockquote { max-width: 25ch; margin: 20px 0 0; font: 680 clamp(2rem, 4vw, 3.5rem)/1.17 var(--font-display), sans-serif; letter-spacing: -.035em; }
+.about-client-first > p:last-child { max-width: 70ch; margin: 18px 0 0; color: #d2e0e5; font-size: 17px; line-height: 1.65; }
+.about-closing { align-items: start; }
+.about-closing-actions { display:grid; justify-items:start; gap:12px; }
+.about-closing .closing-contact { display:grid; justify-items:start; }
 .about-story > div:nth-child(2) { max-width: 70ch; color: var(--muted); font-size: 18px; line-height: 1.7; }
 .about-story figure { margin: 30px 0 0; }
 .about-story figure > div { position: relative; height: min(45vw, 450px); background: var(--surface-navy); }
-.about-story figure img { object-fit: cover; }
-.about-story figcaption { margin-top: 7px; color: var(--muted); font-size: 12px; }
+.about-story figure img, .founder-stock-image img { object-fit:cover; }
 .about-care-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .about-care-grid article { min-height: 215px; padding: 24px; border: 1px solid var(--line); background: var(--card); }
 .about-care-grid span { display: inline-grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--cyan); border-radius: 50%; color: var(--cyan); font-size: 11px; }
@@ -15,8 +18,10 @@
 .about-values-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 15px; }
 .about-values-grid article { padding-top: 20px; border-top: 1px solid var(--line); }
 .about-values-grid h3 { font-size: 20px; }
+.founder-section > .text-arrow { margin-top: 26px; }
+.founder-stock-image { position:relative; width:min(260px,100%); aspect-ratio:.8; margin-top:24px; overflow:hidden; background:var(--surface-navy); }
 @media (max-width: 900px) { .about-care-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .about-values-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (max-width: 767px) { .about-story figure > div { height: 58vw; } .about-care-grid, .about-values-grid { grid-template-columns: 1fr; } .about-care-grid article { min-height: 0; } }
+@media (max-width: 767px) { .about-story figure > div { height: 58vw; } .about-care-grid, .about-values-grid { grid-template-columns: 1fr; } .about-care-grid article { min-height: 0; } .about-closing-actions { margin-top:24px; } }
 
 .about-revision .buyer-steps ol { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; list-style:none; padding:0; margin:0 0 28px; }
 .about-revision .buyer-steps li { padding:22px 22px 28px; border-top:1px solid var(--cyan); background:var(--surface-card); }

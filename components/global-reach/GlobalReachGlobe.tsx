@@ -3,7 +3,6 @@
 import { Component, useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { useReducedMotion } from "motion/react";
-import { clientContent } from "@/lib/content/company";
 import { networkLocations } from "@/lib/globe/locations";
 
 const GlobeScene = dynamic(() => import("./GlobeScene"), { ssr: false, loading: () => null });
@@ -92,10 +91,10 @@ export function GlobalReachGlobe() {
     <div className="reach-globe-sticky">
       <div className="reach-globe-meta"><span>AFRICHEM GLOBALZ / GLOBAL REACH</span><span>DRAG TO EXPLORE ↔</span></div>
       <div className="reach-globe-intro" ref={intro}>
-        <p>INDIA / SEVEN INTERNATIONAL PARTNER COUNTRIES</p>
+        <p>INDIA / SIX INTERNATIONAL PARTNER MARKETS</p>
         <h1 id="reach-title">GLOBAL<br /><span>REACH.</span></h1>
-        <strong>{clientContent.network.overview}</strong>
-        <span className="reach-globe-cue">Explore the network <span aria-hidden="true">↔</span></span>
+        <strong>International trade is built on relationships. Our network connects buyers and business partners across Asia, Africa, the Middle East and Europe.</strong>
+        <a className="reach-globe-cue" href="#reach-partners">Explore our network <span aria-hidden="true">↔</span></a>
       </div>
       <div ref={stage} className="reach-globe-stage globe-stage" data-painted={painted}>
         <div className="globe-atmosphere" aria-hidden="true" />

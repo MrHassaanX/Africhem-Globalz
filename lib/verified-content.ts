@@ -8,17 +8,18 @@ export const founderProfile: {
 } = {};
 
 export const buyerSteps = [
-  { number: "01", title: "Tell us what you need", description: "Share the material or product, quantity and destination." },
-  { number: "02", title: "We source and verify", description: "We review requirements, specifications and available quality documents with you." },
-  { number: "03", title: "We ship and document", description: "Shipping and paperwork requirements are clarified for the destination before a quotation is confirmed." },
+  { number: "01", title: "Tell us what you need", description: "Share the product, quantity and destination so we understand your requirement." },
+  { number: "02", title: "We review and contact you", description: "Our team reviews the information and follows up to clarify specifications and trade requirements." },
+  { number: "03", title: "Receive pricing and details", description: "We discuss available product information, documentation and commercial details for your enquiry." },
+  { number: "04", title: "Confirm and ship", description: "Once requirements and terms are agreed, shipment and delivery planning can proceed." },
 ] as const;
 
 export type ProofPoint = { text: string; approved: boolean; source: string; public: boolean };
 export const proofPoints: readonly ProofPoint[] = [
-  { text: "White Spirit and Thinner enquiries", approved: true, source: "docs/source/Africhem_Globalz_About_Us.docx", public: true },
-  { text: "India as our primary country", approved: true, source: "docs/source/Africhem_Globalz_About_Us.docx", public: true },
-  { text: "Seven international partner countries", approved: true, source: "docs/source/Africhem_Globalz_About_Us.docx", public: true },
-  { text: "Direct phone, email and WhatsApp contact", approved: true, source: "User-confirmed contact channels", public: true },
+  { text: "Verified Suppliers", approved: true, source: "Website content.docx — requested by user", public: true },
+  { text: "Documentation Support", approved: true, source: "Website content.docx — requested by user", public: true },
+  { text: "Global Logistics", approved: true, source: "Website content.docx — requested by user", public: true },
+  { text: "Personal Assistance", approved: true, source: "Website content.docx — requested by user", public: true },
   { text: "COA checked before cargo ships", approved: false, source: "Historical client copy; operational evidence pending", public: false },
   { text: "Customs clearance handled", approved: false, source: "Historical client copy; operational evidence pending", public: false },
 ];

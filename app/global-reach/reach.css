@@ -22,7 +22,7 @@
 .reach-globe-intro h1 { margin: 0 0 30px; font: 560 clamp(70px, 7.2vw, 132px)/.9 var(--font-display), sans-serif; letter-spacing: -.07em; }
 .reach-globe-intro h1 span { color: var(--reach-accent); }
 .reach-globe-intro > strong { display: block; max-width: 29ch; font: 440 clamp(20px, 1.85vw, 29px)/1.32 var(--font-display), sans-serif; letter-spacing: -.035em; }
-.reach-globe-cue { display: flex; justify-content: space-between; align-items: center; width: 230px; max-width: 100%; margin-top: 36px; padding-bottom: 13px; border-bottom: 1px solid var(--reach-rule); font-size: 12px; }
+.reach-globe-cue { display: flex; justify-content: space-between; align-items: center; width: 230px; max-width: 100%; margin-top: 36px; padding-bottom: 13px; border-bottom: 1px solid var(--reach-rule); font-size: 12px; pointer-events: auto; }
 .reach-globe-cue span { font-size: 22px; line-height: 1; }
 .globe-stage canvas { display: block; }
 .globe-atmosphere { position: absolute; inset: 9% 16%; border-radius: 50%; background: var(--reach-atmosphere); filter: blur(28px); pointer-events: none; }
@@ -53,12 +53,24 @@
 .reach-country-list li span { color: var(--muted); font-size: 10px; font-weight: 600; letter-spacing: .08em; }
 .reach-country-list li span:last-child { text-align: right; }
 .reach-country-list li strong { font: 460 clamp(25px, 2.7vw, 41px)/1 var(--font-display), sans-serif; letter-spacing: -.05em; }
+.reach-country-list li small { grid-column: 3 / 5; margin: -13px 0 14px; color: var(--muted); font-size: 12px; line-height: 1.45; }
 .reach-country-list li[data-primary="true"] strong { color: var(--blue); }
 .reach-country-list li[data-primary="true"] span:last-child { color: var(--cyan); }
 .reach-cta { padding-top: 30px; padding-bottom: var(--section-space-xl); border-top: 1px solid var(--line); }
 .reach-cta > div { display: flex; justify-content: space-between; align-items: end; gap: 45px; margin-top: 60px; }
 .reach-cta a { display: flex; justify-content: space-between; gap: 40px; min-width: 260px; padding: 19px 0; border-bottom: 1px solid var(--ink); font-size: 14px; }
 .reach-cta a span { font-size: 23px; line-height: .8; }
+.reach-quote-attribution { margin: 18px 0 0; color: var(--muted); font-size: 13px; letter-spacing: .04em; }
+.reach-support-copy { max-width: 48ch; margin: 0; color: var(--muted); font-size: 16px; line-height: 1.65; }
+.reach-cta-contact { display:grid; gap:7px; margin:20px 0 0; color:var(--muted); font-size:13px; line-height:1.5; }
+.reach-cta-contact a { display:inline; min-width:0; margin:0; padding:0; border:0; text-decoration:underline; }
+.reach-cta-contact span { max-width:58ch; }
+.reach-logo-wall > div:first-of-type p { max-width: 38ch; margin: 0; color: var(--muted); line-height: 1.55; }
+.partner-logo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 40px; }
+.partner-logo-grid > div { display: grid; place-items: center; min-height: 100px; padding: 18px; border: 1px dashed var(--line); color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-align: center; text-transform: uppercase; }
+.partner-logo-grid > div { position:relative; overflow:hidden; min-height:150px; aspect-ratio:1.6; border:0; padding:0; }
+.partner-logo-grid img { object-fit:cover; }
+.reach-logo-disclosure { max-width:70ch; margin:14px 0 0; color:var(--muted); font-size:12px; line-height:1.5; }
 
 @media (max-width: 1099px) {
   .reach-hero { min-height: calc(85svh - 88px); }
@@ -97,6 +109,7 @@
   .reach-cta > div { display: block; margin-top: 48px; }
   .reach-cta h2 { font-size: clamp(44px, 11vw, 52px); }
   .reach-cta a { margin-top: 45px; }
+  .partner-logo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 390px) { .reach-globe-caption { max-width: 275px; } }
 @media (prefers-reduced-motion: reduce) {
