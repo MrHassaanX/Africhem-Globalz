@@ -18,7 +18,7 @@ export default async function BusinessPage({ params }: { params: Promise<{ slug:
 
   return <article className="revision-page other-businesses-revision">
     <header className="revision-hero wrap">
-      <p className="revision-kicker"><Link href="/other-businesses">OTHER BUSINESSES</Link> / {data.name.toUpperCase()}</p>
+      <p className="revision-kicker"><Link href="/other-businesses">OTHER BUSINESSES AND PARTNERS</Link> / {data.name.toUpperCase()}</p>
       <h1>{data.name}</h1>
       <p>{data.description}</p>
       <QuoteLink category={data.slug} />
