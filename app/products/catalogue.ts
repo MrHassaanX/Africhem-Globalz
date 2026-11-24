@@ -23,7 +23,7 @@ const documentCategories = [
     name: "Paints & Coatings",
     description: "Raw materials supporting coatings, paint and construction sectors.",
     image: "/stock/industrial-refinery.webp",
-    quoteCategory: "custom-sourcing",
+    quoteCategory: "paints-and-coatings",
     products: ["Titanium Dioxide (TiO₂)", "Alkyd Resin", "White Cement"],
   },
   {
@@ -39,7 +39,7 @@ const documentCategories = [
     name: "Thinners & White Spirit",
     description: "Solutions for paints, coatings and surface treatment industries.",
     image: "/stock/port-logistics.webp",
-    quoteCategory: "solvents",
+    quoteCategory: "thinners-and-white-spirit",
     products: ["White Spirit", "Thinners", "NC Thinner", "Lacquer Thinner", "Paint Solvent", "Solvent W.S.", "Industrial Composite Solvent"],
   },
   {
