@@ -27,6 +27,7 @@ button:focus-visible, a:focus-visible, main:focus-visible { outline: 2px solid v
 .brand { flex-shrink: 0; display: flex; width: 190px; position: relative; isolation: isolate; }
 .brand img { position: relative; z-index: 1; width: 100%; height: auto; }
 [data-theme="dark"] .brand img { filter: invert(1) hue-rotate(180deg); }
+[data-theme="dark"] .footer-name img { filter: invert(1) hue-rotate(180deg); }
 .desktop-nav { display: flex; justify-content: center; align-items: center; gap: clamp(12px, 1.45vw, 26px); flex: 1; }
 .desktop-nav a { position: relative; font-size: var(--type-label); font-weight: 550; padding-block: 14px; white-space: nowrap; }
 .desktop-nav a::after { position: absolute; content: ""; height: 2px; width: 16px; background: var(--cyan); bottom: 5px; left: calc(50% - 8px); transform: scaleX(0); transition: transform .25s var(--ease); }
