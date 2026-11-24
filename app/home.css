@@ -74,9 +74,12 @@
 
 .home-material-stage {
   position: relative;
-  min-height: 100%;
+  min-height: 0;
+  margin-bottom: 60px;
   overflow: hidden;
   background: var(--surface-navy);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
 }
 
 .home-material-image { object-fit: cover; object-position: 51% 56%; }
@@ -308,7 +311,13 @@
   .home-hero-inner, .home-section-heading { grid-template-columns: 1fr; }
   .home-hero-inner { min-height: 0; gap: 24px; }
   .home-hero-copy { padding: 24px var(--gutter) 0; }
-  .home-material-stage { min-height: 0; aspect-ratio: 1.67; }
+  .home-material-stage {
+    min-height: 0;
+    margin-bottom: 0;
+    aspect-ratio: 1.67;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 82%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 82%, transparent 100%);
+  }
 }
 
 @media (max-width: 767px) {
