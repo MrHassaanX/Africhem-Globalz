@@ -58,14 +58,12 @@ export function GlobalReachGlobe() {
 
   return <section className="reach-globe-journey" id="network-globe" aria-labelledby="reach-title">
     <div className="reach-globe-layout">
-      <div className="reach-globe-meta"><span>AFRICHEM GLOBALZ / GLOBAL REACH</span><span>DRAG TO EXPLORE ↔</span></div>
       <div className="reach-globe-intro">
-        <p>INDIA / SIX INTERNATIONAL PARTNER MARKETS</p>
-        <h1 id="reach-title">GLOBAL<br /><span>REACH.</span></h1>
-        <strong>International trade is built on relationships. Our network connects buyers and business partners across Asia, Africa, the Middle East and Europe.</strong>
-        <a className="reach-globe-cue" href="#reach-partners">Explore our network <span aria-hidden="true">↔</span></a>
+        <h1 id="reach-title">GLOBAL<br />{" "}<span>REACH.</span></h1>
+        <p className="reach-globe-summary">From our base in India, we connect buyers and business partners across Asia, Africa, the Middle East and Europe.</p>
+        <a className="reach-globe-cue" href="#reach-partners">Explore our markets <span aria-hidden="true">↓</span></a>
         <div className="reach-globe-hud">
-          <div className="globe-selection" aria-live="polite">{selected === null ? "SELECT A POINT TO EXPLORE" : <><span>{networkLocations[selected].primary ? "PRIMARY COUNTRY · LAST EXPLORED" : "PARTNER COUNTRY · LAST EXPLORED"}</span><strong>{networkLocations[selected].name}</strong></>}</div>
+          <div className="globe-selection" aria-live="polite">{selected === null ? "Drag the globe or select a marker." : <><span>{networkLocations[selected].primary ? "Operating base" : "Partner market"}</span><strong>{networkLocations[selected].name}</strong></>}</div>
         </div>
       </div>
       <div ref={stage} className="reach-globe-stage globe-stage" data-painted={painted}>
@@ -73,6 +71,7 @@ export function GlobalReachGlobe() {
         <div className="globe-preview" aria-hidden="true" />
         <GlobeBoundary><GlobeScene dark={dark} active={active} reducedMotion={reducedMotion} onSelectionChange={setSelected} /></GlobeBoundary>
       </div>
+      <p className="reach-globe-caption">Markers show our operating base and partner markets. Arcs illustrate business relationships and do not represent shipping routes or office locations.</p>
     </div>
   </section>;
 }
