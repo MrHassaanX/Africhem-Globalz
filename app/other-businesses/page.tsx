@@ -35,7 +35,7 @@ export default function OtherBusinessesPage() {
       <div className={`revision-section wrap surface-band surface-band--warm ${styles.section}`}>
         <div className={styles.cards}>
           {otherBusinesses.map(business => (
-            <article className={`business-card ${styles.card}`} key={business.slug}>
+            <article className={`business-card ${styles.card}`} id={business.slug} key={business.slug}>
               <div className={`business-card-art ${styles.cardArt}`}>
                 <Image src={business.image} alt="" fill sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, (max-width: 1280px) 33vw, 390px" />
               </div>
