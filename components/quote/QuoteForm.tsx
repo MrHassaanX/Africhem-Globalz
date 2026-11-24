@@ -13,47 +13,64 @@ const autocomplete = {
   phone: "tel",
 } as const;
 
+const blankEnquiry = { quantity: "", unit: "", destination: "", dateNeeded: "", message: "" };
+const draftKey = (category: string, product: string) => JSON.stringify([category, product]);
+
 export function QuoteForm({ enabled, initialCategory, initialProduct, initialDestination }: {
   enabled: boolean;
   initialCategory: string;
   initialProduct: string;
   initialDestination: string;
 }) {
-  const [values, setValues] = useState<QuoteFields>(() => ({
-    ...blankQuote,
-    category: quoteCategories.some(item => item.value === initialCategory) ? initialCategory : "",
-    destination: initialDestination.slice(0, 200),
-  }));
-  const [productDrafts, setProductDrafts] = useState<Record<string, string>>(() =>
-    chemicalProducts.some(item => item.slug === initialProduct && item.family === initialCategory)
-      ? { [initialCategory]: initialProduct }
+  const [category, setCategory] = useState(() =>
+    quoteCategories.some(item => item.value === initialCategory) ? initialCategory : "",
+  );
+  const [selectedProducts, setSelectedProducts] = useState<Record<string, string>>(() =>
+    chemicalProducts.some(item => item.slug === initialProduct && item.family === category)
+      ? { [category]: initialProduct }
       : {},
+  );
+  const product = selectedProducts[category] ?? "";
+  const activeDraft = draftKey(category, product);
+  const [drafts, setDrafts] = useState<Record<string, typeof blankEnquiry>>(() => ({
+    [activeDraft]: { ...blankEnquiry, destination: initialDestination.slice(0, 200) },
+  }));
+  const [shared, setShared] = useState(
+    () => ({ name: "", company: "", country: "", email: "", phone: "", website: "" }),
   );
   const [errors, setErrors] = useState<QuoteErrors>({});
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
   const [notice, setNotice] = useState("");
   const form = useRef<HTMLFormElement>(null);
   const id = useId();
-  const profile = getQuoteProfile(values.category);
-  const products = chemicalProducts.filter(item => item.family === values.category);
-  const product = products.length ? productDrafts[values.category] ?? "" : "";
+  const profile = getQuoteProfile(category);
+  const products = chemicalProducts.filter(item => item.family === category);
+  const values: QuoteFields = { ...blankQuote, ...shared, ...(drafts[activeDraft] ?? blankEnquiry), category, product };
 
   function change(key: keyof QuoteFields, value: string) {
-    if (key === "product") {
-      setProductDrafts(previous => ({ ...previous, [values.category]: value }));
-    } else {
-      setValues(previous => ({ ...previous, [key]: value }));
+    if (key === "category" || key === "product") {
+      if (key === "category") setCategory(value);
+      else setSelectedProducts(previous => ({ ...previous, [category]: value }));
+      setErrors({});
+      setNotice("");
+      return;
     }
-    setErrors(previous => key === "category"
-      ? { ...previous, category: undefined, product: undefined, quantity: undefined, unit: undefined }
-      : { ...previous, [key]: undefined });
+    if (Object.hasOwn(blankEnquiry, key)) {
+      setDrafts(previous => ({
+        ...previous,
+        [activeDraft]: { ...(previous[activeDraft] ?? blankEnquiry), [key]: value },
+      }));
+    } else {
+      setShared(previous => ({ ...previous, [key]: value }));
+    }
+    setErrors(previous => ({ ...previous, [key]: undefined }));
   }
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!enabled || status === "sending") return;
 
-    const checked = validateQuote({ ...values, product });
+    const checked = validateQuote(values);
     setErrors(checked.errors);
     if (Object.keys(checked.errors).length) {
       setNotice("Please correct the highlighted fields.");

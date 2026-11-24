@@ -1,7 +1,11 @@
 import { chemicalFamilies, chemicalProducts } from "@/lib/chemical-catalogue";
 import { otherBusinesses } from "@/lib/businesses";
 
-export const quoteProductCategories = chemicalFamilies.map(item => ({ value: item.slug, label: item.name }));
+export const quoteProductCategories = [
+  ...chemicalFamilies.map(item => ({ value: item.slug, label: item.name })),
+  { value: "paints-and-coatings", label: "Paints & Coatings" },
+  { value: "thinners-and-white-spirit", label: "Thinners & White Spirit" },
+];
 export const quoteBusinessCategories = otherBusinesses.map(item => ({ value: item.slug, label: item.name }));
 export const quoteCategories = [...quoteProductCategories, ...quoteBusinessCategories];
 export const quoteUnits = ["kg", "tonnes", "litres", "drums", "units", "other"] as const;
