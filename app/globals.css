@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "../styles/tokens.css";
 @import "lenis/dist/lenis.css";
+.cookie-notice{position:fixed;z-index:90;left:max(18px,env(safe-area-inset-left));right:max(18px,env(safe-area-inset-right));bottom:18px;max-width:680px;display:flex;align-items:center;gap:22px;padding:18px 20px;background:#fff;color:#18323c;border:1px solid #b7c8ce;box-shadow:0 12px 38px #001b2b33}.cookie-notice p{margin:0;font-size:14px;line-height:1.5}.cookie-notice a{text-decoration:underline}.cookie-notice button{flex:none;border:0;background:#075c68;color:white;padding:10px 16px;font-size:14px;font-weight:700}@media(max-width:540px){.cookie-notice{display:block}.cookie-notice button{margin-top:12px}}
 * { box-sizing: border-box; }
 html { background: var(--paper); scroll-padding-top: 110px; }
 body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body), Arial, sans-serif; font-size: var(--type-body); line-height: var(--body-leading); -webkit-font-smoothing: antialiased; }

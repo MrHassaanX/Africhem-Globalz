@@ -1,4 +1,5 @@
 type ProductPresentation = { description: string; image: string };
+import reviewEdits from "./review-edits.json";
 
 const polymers = "/materials/mineral-crystal.webp";
 const fuels = "/stock/industrial-tanks-sunset.webp";
@@ -9,7 +10,7 @@ const transfer = "/materials/chemical-transfer.webp";
 const refinery = "/stock/industrial-refinery.webp";
 const port = "/stock/port-logistics.webp";
 
-export const productPresentations: Record<string, ProductPresentation> = {
+const defaults: Record<string, ProductPresentation> = {
   HDPE: { description: "Polymer enquiries for rigid packaging and industrial applications.", image: polymers },
   LDPE: { description: "Flexible packaging and processing material enquiries.", image: transfer },
   LLDPE: { description: "Film, packaging and manufacturing material enquiries.", image: industrial },
@@ -44,3 +45,5 @@ export const productPresentations: Record<string, ProductPresentation> = {
   "Hydrochloric Acid (HCL)": { description: "Industrial acid enquiries with concentration to confirm.", image: transfer },
   "Sulphuric Acid": { description: "Industrial acid enquiries with concentration to confirm.", image: refinery },
 };
+
+export const productPresentations: Record<string, ProductPresentation> = { ...defaults, ...reviewEdits };

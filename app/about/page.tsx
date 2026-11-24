@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { siteImage } from "@/lib/site-images";
 import { clientContent } from "@/lib/content/company";
 import { companyIdentity, founderProfile } from "@/lib/verified-content";
 import { QuoteLink } from "@/components/QuoteLink";
@@ -46,7 +47,7 @@ export default function AboutPage() {
         </div>
         <div className={styles.heroMedia}>
           <div className={styles.heroImage}>
-            <Image src="/stock/port-logistics.webp" alt="Cargo port and logistics operations" fill sizes="(max-width: 799px) 92vw, (max-width: 1600px) 46vw, 680px" fetchPriority="high" />
+            <Image src={siteImage("about-hero", "/stock/port-logistics.webp")} alt="" fill sizes="(max-width: 799px) 92vw, (max-width: 1600px) 46vw, 680px" fetchPriority="high" />
           </div>
           <ul className={styles.highlights} role="list">
             {highlights.map(({ icon, text }) => (

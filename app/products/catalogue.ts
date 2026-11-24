@@ -1,5 +1,6 @@
 // Product names and category descriptions from Website content - PARTNERS.docx.
 import { chemicalFamilies, getChemicalFamily } from "@/lib/chemical-catalogue";
+import { siteImage } from "@/lib/site-images";
 
 const documentCategories = [
   {
@@ -52,7 +53,7 @@ const documentCategories = [
   },
 ] as const;
 
-export const productCategories = [
+const categoryDefaults = [
   ...documentCategories,
   {
     slug: "custom-sourcing",
@@ -63,6 +64,7 @@ export const productCategories = [
     products: [],
   },
 ] as const;
+export const productCategories = categoryDefaults.map(item => ({ ...item, image: siteImage(`category-${item.slug}`, item.image) }));
 
 export const productCategorySlugs = [...new Set([
   ...chemicalFamilies.map(({ slug }) => slug),
@@ -74,5 +76,5 @@ export function getProductCategory(slug: string) {
   const category = productCategories.find(item => item.slug === slug);
 
   if (!existing) return category;
-  return { ...existing, quoteCategory: slug, products: category?.products ?? [] };
+  return { ...existing, image: category?.image ?? existing.image, quoteCategory: slug, products: category?.products ?? [] };
 }
