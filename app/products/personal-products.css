@@ -272,18 +272,19 @@
 
 .product-item-grid { margin-top: 20px; }
 
-.product-item-grid > li > :is(a, span) {
+.product-item-card { overflow: hidden; }
+.product-item-image { position: relative; aspect-ratio: 2.3; background: var(--surface-navy); }
+.product-item-image img { object-fit: cover; }
+.product-item-copy { padding: clamp(16px, 2vw, 24px); }
+.product-item-copy h3, .product-item-copy a {
   display: flex;
-  flex: 1;
-  align-items: center;
   justify-content: space-between;
-  gap: 10px;
-  min-height: 64px;
-  padding: 16px;
-  border-radius: inherit;
-  font: 600 clamp(17px, 2vw, 22px)/1.25 var(--font-display), sans-serif;
-  overflow-wrap: anywhere;
+  gap: 12px;
+  margin: 0 0 8px;
+  font: 620 clamp(18px, 2vw, 23px)/1.25 var(--font-display), sans-serif;
 }
+.product-item-copy p { margin: 0; color: var(--muted); font-size: 1rem; line-height: 1.55; }
+
 
 .product-detail-links {
   margin-top: 24px;

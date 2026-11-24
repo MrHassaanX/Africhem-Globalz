@@ -32,7 +32,7 @@ const documentCategories = [
     description: "Acetone · IPA · Methanol · Ethyl Acetate. Supporting manufacturing, coatings, printing and industrial applications.",
     image: "/materials/liquid-glass.webp",
     quoteCategory: "solvents",
-    products: ["Acetone", "MDC (Methylene Dichloride)", "M-Xylene", "Toluene", "BTX"],
+    products: ["Acetone", "IPA", "Methanol", "Ethyl Acetate", "MDC (Methylene Dichloride)", "M-Xylene", "Toluene", "BTX"],
   },
   {
     slug: "thinners-and-white-spirit",

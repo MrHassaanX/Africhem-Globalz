@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { QuoteLink } from "@/components/QuoteLink";
 import { chemicalProducts } from "@/lib/chemical-catalogue";
 import { getProductCategory, productCategorySlugs } from "../catalogue";
+import { productPresentations } from "../product-presentations";
 import "../personal-products.css";
 
 type FamilyPageProps = { params: Promise<{ family: string }> };
@@ -64,11 +65,18 @@ export default async function FamilyPage({ params }: FamilyPageProps) {
           </h2>
           {products.length ? (
             <ul className="product-item-grid" role="list">
-              {products.map(({ name, detail }) => (
-                <li key={name}>
-                  {detail ? <Link href={`/products/${detail.family}/${detail.slug}`}>{name}<span aria-hidden="true">→</span></Link> : <span>{name}</span>}
-                </li>
-              ))}
+              {products.map(({ name, detail }) => {
+                const presentation = productPresentations[name];
+                return <li key={name} className="product-item-card">
+                  <div className="product-item-image">
+                    <Image src={presentation?.image ?? category.image} alt="" fill sizes="(max-width: 599px) 92vw, (max-width: 999px) 45vw, 400px" />
+                  </div>
+                  <div className="product-item-copy">
+                    {detail ? <Link href={`/products/${detail.family}/${detail.slug}`}>{name}<span aria-hidden="true">→</span></Link> : <h3>{name}</h3>}
+                    <p>{presentation?.description ?? `Discuss specifications and sourcing options for ${name}.`}</p>
+                  </div>
+                </li>;
+              })}
             </ul>
           ) : (
             <p>{customSourcing
