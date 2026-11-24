@@ -3,25 +3,26 @@ import Link from "next/link";
 import Image from "next/image";
 import { clientContent } from "@/lib/content/company";
 import { companyIdentity, founderProfile } from "@/lib/verified-content";
-import { BuyerSteps } from "@/components/BuyerSteps";
 import { QuoteLink } from "@/components/QuoteLink";
 import { HomeIcon } from "@/components/home/HomeIcon";
-import "./about.css";
+import styles from "./about.module.css";
 
-export const metadata: Metadata = { title: "About", description: "Learn about Africhem Globalz, our sourcing approach, client-first principle and international business relationships.", alternates: { canonical: "/about" } };
+export const metadata: Metadata = {
+  title: "About",
+  description: "Learn about Africhem Globalz, our sourcing approach, client-first principle and international business relationships.",
+  alternates: { canonical: "/about" },
+};
 
-const orderCare = [
-  { number: "01", title: "Understand your requirement", text: "We begin with your material, specifications, quantity, destination and business objectives." },
-  { number: "02", title: "Discuss available options", text: "Products, supplier options, documentation requirements and commercial considerations are discussed together." },
-  { number: "03", title: "Verify before moving forward", text: "Specifications, quality information and available documentation are clarified before commitments are made." },
-  { number: "04", title: "Coordinate the process", text: "Packaging, shipping requirements and delivery planning become part of the same sourcing conversation." },
-  { number: "05", title: "Stay connected", text: "Clear communication remains available throughout the process because successful trade depends on responsiveness." },
+const highlights = [
+  { icon: "document", text: "10+ years in trade" },
+  { icon: "globe", text: "7 strategic markets" },
+  { icon: "person", text: "Direct access to decision makers" },
 ] as const;
 
-const aboutJourney = [
-  { number: "01", title: "Tell us what you need", description: "Share your product, specification, quantity and destination." },
-  { number: "02", title: "We review and discuss", description: "We evaluate sourcing options, documentation requirements and commercial considerations before proceeding." },
-  { number: "03", title: "We coordinate and deliver", description: "Once requirements are aligned, we support execution through communication, documentation and logistics coordination." },
+const sourcingSteps = [
+  { title: "Understand the requirement", text: "We start with your material, specifications, quantity, destination and business objectives." },
+  { title: "Review options and verify details", text: "We discuss products, suppliers and commercial terms, then clarify specifications, quality information and available documentation before you commit." },
+  { title: "Coordinate through delivery", text: "We plan packaging, shipment and delivery with you and stay in touch throughout the order." },
 ] as const;
 
 const valueIcons = {
@@ -35,114 +36,124 @@ const valueIcons = {
 
 export default function AboutPage() {
   return (
-    <article className="revision-page about-revision">
-      <header className="revision-hero wrap about-hero">
+    <article className={`revision-page about-revision ${styles.page}`}>
+      <header className={`revision-hero wrap ${styles.hero}`}>
         <div>
-          <p className="revision-kicker">SECTION 01 / ABOUT AFRICHEM GLOBALZ</p>
-          <h1>Ten years in trade. Built around one simple belief. Business should be easier.</h1>
-        </div>
-        <div className="about-intro">
-          <p>For more than a decade, we have worked across sourcing, supply chains, international trade and business development. That experience taught us that many business challenges begin with communication, sourcing, documentation and follow-up. Africhem Globalz was built to simplify those challenges through trusted relationships, practical problem-solving and dependable execution.</p>
+          <p className="revision-kicker">About Africhem Globalz</p>
+          <h1>Making sourcing and trade easier.</h1>
+          <p className={styles.lead}>We help businesses source products, clarify documentation and coordinate shipments, backed by more than a decade in sourcing, supply chains, international trade and business development.</p>
           <QuoteLink label="Discuss Your Requirement" />
         </div>
-        <ul className="about-highlights" role="list">
-          <li>SOURCING SIMPLIFIED.</li>
-          <li><HomeIcon name="document" />10+ years trade experience</li>
-          <li><HomeIcon name="globe" />7 strategic markets</li>
-          <li><HomeIcon name="shield" />Client-first approach</li>
-          <li><HomeIcon name="person" />Direct access to decision makers</li>
-        </ul>
-      </header>
-      <section className="revision-section wrap about-story surface-band surface-band--warm">
-        <div>
-          <div className="revision-section-head">
-            <p className="revision-kicker">02 / OUR STORY</p>
-            <h2>We&apos;ve worked where the problems happen.</h2>
+        <div className={styles.heroMedia}>
+          <div className={styles.heroImage}>
+            <Image src="/stock/port-logistics.webp" alt="Cargo port and logistics operations" fill sizes="(max-width: 799px) 92vw, (max-width: 1600px) 46vw, 680px" fetchPriority="high" />
           </div>
-          <div className="about-story-copy">
-            <p>Not from a desk or a catalogue, but from factory floors, supplier discussions, documentation reviews, shipment coordination and customer conversations.</p>
-            <p>Over the years, we have worked with manufacturers, distributors, logistics partners and buyers across industries and international markets. Those experiences shaped Africhem into a company focused on making sourcing and trade easier for our clients.</p>
+          <ul className={styles.highlights} role="list">
+            {highlights.map(({ icon, text }) => (
+              <li key={text}><HomeIcon name={icon} />{text}</li>
+            ))}
+          </ul>
+        </div>
+      </header>
+
+      <section className={`revision-section wrap surface-band surface-band--warm ${styles.story}`} aria-labelledby="about-story">
+        <div className="revision-section-head">
+          <p className="revision-kicker">Our story</p>
+          <h2 id="about-story">Experience across the supply chain</h2>
+        </div>
+        <div className={styles.prose}>
+          <p>Our experience spans factory floors, supplier discussions, documentation reviews, shipment coordination and conversations with customers. We’ve worked with manufacturers, distributors, logistics partners and buyers across industries and international markets.</p>
+          <p>That work showed us where orders can get held up, from unclear specifications to gaps in follow-up. We built Africhem Globalz to make those steps easier for clients.</p>
+        </div>
+      </section>
+
+      <section className="revision-section wrap surface-band surface-band--cool" aria-labelledby="about-sourcing">
+        <div className="revision-section-head">
+          <p className="revision-kicker">How we work</p>
+          <h2 id="about-sourcing">From requirement to delivery</h2>
+        </div>
+        <ol className={styles.steps} role="list">
+          {sourcingSteps.map(({ title, text }, index) => (
+            <li key={title}>
+              <span className={styles.stepNumber} aria-hidden="true">{index + 1}</span>
+              <div><h3>{title}</h3><p>{text}</p></div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section className="revision-section wrap" aria-labelledby="about-reach">
+        <div className="revision-section-head">
+          <p className="revision-kicker">Our reach</p>
+          <h2 id="about-reach">Where we work and what we do</h2>
+        </div>
+        <div className={styles.scope}>
+          <div>
+            <HomeIcon name="globe" />
+            <h3>Seven strategic markets</h3>
+            <p>Our business relationships span {clientContent.network.summary}</p>
+            <Link className="text-arrow" href="/global-reach">Explore Global Reach <span aria-hidden="true">→</span></Link>
+          </div>
+          <div>
+            <HomeIcon name="layers" />
+            <h3>Five areas of business</h3>
+            <p>Our work spans chemicals, footwear, agriculture, logistics and recycling.</p>
+            <Link className="text-arrow" href="/other-businesses">Explore Other Businesses and Partners <span aria-hidden="true">→</span></Link>
           </div>
         </div>
-        <figure><Image src="/stock/port-logistics.webp" alt="Cargo port and logistics operations" fill sizes="(max-width: 767px) 91vw, (max-width: 1600px) 42vw, 680px" /></figure>
       </section>
-      <div className="revision-section wrap surface-band surface-band--cool about-process">
-        <section>
+
+      <section className="revision-section wrap surface-band surface-band--warm" aria-labelledby="about-values">
+        <div className={styles.principle}>
           <div className="revision-section-head">
-            <p className="revision-kicker">03 / HOW WE WORK</p>
-            <h2>Every order starts with understanding.</h2>
+            <p className="revision-kicker">Our values</p>
+            <h2 id="about-values">Client first. Always.</h2>
           </div>
-          <ol className="about-care-list" role="list">
-            {orderCare.map(item => <li key={item.number}>
-              <span aria-hidden="true">{item.number}</span>
-              <div><h3>{item.title}</h3><p>{item.text}</p></div>
-            </li>)}
-          </ol>
+          <div className={styles.prose}>
+            <p>Our founder’s principle is simple: people buy from people. We put the client’s interests first and aim to earn long-term trust by taking responsibility for the order and staying available when problems arise.</p>
+            {founderProfile.name && founderProfile.role && founderProfile.biography && (
+              <div className={styles.founder}>
+                {founderProfile.portrait && <Image src={founderProfile.portrait} alt={founderProfile.name} width={520} height={650} sizes="(max-width: 767px) 80vw, 260px" />}
+                <h3>{founderProfile.name}</h3>
+                <p>{founderProfile.role}</p>
+                <p>{founderProfile.biography}</p>
+                {founderProfile.linkedin && <a className="text-arrow" href={founderProfile.linkedin}>LinkedIn profile <span aria-hidden="true">↗</span></a>}
+              </div>
+            )}
+          </div>
+        </div>
+        <ul className={styles.values} role="list">
+          {clientContent.values.map(value => (
+            <li key={value.title}>
+              <HomeIcon name={valueIcons[value.title]} />
+              <h3>{value.title}</h3>
+              <p>{value.description}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {companyIdentity.legalName && (
+        <section className={`revision-section wrap ${styles.prose}`}>
+          <h2>Business identity</h2>
+          <p>{companyIdentity.legalName}</p>
+          {companyIdentity.registrationNumber && <p>Registration: {companyIdentity.registrationNumber}</p>}
+          {companyIdentity.iec && <p>IEC: {companyIdentity.iec}</p>}
+          {companyIdentity.gstin && <p>GSTIN: {companyIdentity.gstin}</p>}
+          {companyIdentity.registeredAddress && <p>{companyIdentity.registeredAddress}</p>}
         </section>
-        <section>
-          <div className="revision-section-head">
-            <p className="revision-kicker">04 / THE BUYER JOURNEY</p>
-            <h2>From requirement to delivery.</h2>
+      )}
+
+      <section className={`revision-closing wrap surface-band ${styles.closing}`} aria-labelledby="about-contact">
+        <div>
+          <h2 id="about-contact">Discuss your sourcing needs</h2>
+          <div className="closing-contact">
+            <a href="mailto:sales@africhem-globalz.com">sales@africhem-globalz.com</a>
+            <a href="tel:+916362830638">+91 63628 30638</a>
           </div>
-          <BuyerSteps compact steps={aboutJourney} />
-          <p className="revision-lead">No unnecessary complexity. No confusing processes. No endless email chains. Just clear communication and practical execution.</p>
-        </section>
-      </div>
-      <div className="revision-section wrap surface-band surface-band--muted about-scope">
-        <section>
-          <div className="revision-section-head">
-            <p className="revision-kicker">05 / GLOBAL NETWORK</p>
-            <h2>Relationships across seven strategic markets.</h2>
-          </div>
-          <p className="revision-lead">{clientContent.network.summary} These are business relationships, not claims of Africhem offices or verified shipping routes.</p>
-          <Link className="text-arrow" href="/global-reach">Explore Global Reach <span aria-hidden="true">→</span></Link>
-        </section>
-        <section>
-          <div className="revision-section-head">
-            <p className="revision-kicker">OTHER BUSINESS AREAS</p>
-            <h2>Different industries. One approach.</h2>
-          </div>
-          <p className="revision-lead">Trusted relationships. Practical solutions. Reliable execution. From chemicals and footwear to agriculture, logistics and recycling, our focus is on making business simpler.</p>
-          <Link className="text-arrow" href="/other-businesses">Explore Other Businesses and Partners <span aria-hidden="true">→</span></Link>
-        </section>
-      </div>
-      <div className="revision-section wrap surface-band surface-band--warm about-principles">
-        <section>
-          <div className="revision-section-head">
-            <p className="revision-kicker">06 / FOUNDER&apos;S PRINCIPLE</p>
-            <h2>People buy from people.</h2>
-          </div>
-          <p className="revision-lead">After ten years in international trade and business development, one lesson remains unchanged: trust is the most valuable product any company can offer. Clients purchase confidence, reliability and responsiveness—the assurance that someone will answer when challenges arise. That is the standard we work towards every day.</p>
-          <p className="revision-kicker">Founder · Africhem GlobalZ</p>
-          {founderProfile.name && founderProfile.role && founderProfile.biography && (
-            <div className="founder-profile">
-              {founderProfile.portrait && <div className="founder-stock-image"><Image src={founderProfile.portrait} alt={founderProfile.name} width={520} height={650} sizes="(max-width: 767px) 80vw, 260px" /></div>}
-              <h3>{founderProfile.name}</h3>
-              <p>{founderProfile.role}</p>
-              <p>{founderProfile.biography}</p>
-              {founderProfile.linkedin && <a className="text-arrow" href={founderProfile.linkedin}>LinkedIn profile <span aria-hidden="true">↗</span></a>}
-            </div>
-          )}
-        </section>
-        <section>
-          <div className="revision-section-head">
-            <p className="revision-kicker">07 / VALUES</p>
-            <h2>What guides our work.</h2>
-          </div>
-          <div className="about-values-grid">
-            {clientContent.values.map(value => (
-              <article key={value.title}>
-                <HomeIcon name={valueIcons[value.title]} />
-                <h3>{value.title}</h3>
-                <p>{value.description}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-      </div>
-      <section className="about-client-first wrap"><div><p className="revision-kicker">08 / OUR FIRST PRINCIPLE</p><blockquote>Client first. Always.</blockquote></div><p>If our interests and your interests ever differ, we believe your business comes first. Long-term partnerships are built through trust, not transactions. Our goal is not to complete a single order; it is to become a trusted business partner for years to come.</p></section>
-      {companyIdentity.legalName && <section className="revision-section wrap"><h2>Business identity</h2><p>{companyIdentity.legalName}</p>{companyIdentity.registrationNumber && <p>Registration: {companyIdentity.registrationNumber}</p>}{companyIdentity.iec && <p>IEC: {companyIdentity.iec}</p>}{companyIdentity.gstin && <p>GSTIN: {companyIdentity.gstin}</p>}{companyIdentity.registeredAddress && <p>{companyIdentity.registeredAddress}</p>}</section>}
-      <section className="revision-closing wrap about-closing"><div><p className="revision-kicker">START A CONVERSATION</p><h2>Tell us the requirement. We&apos;ll help navigate the rest.</h2><p className="closing-contact"><a href="mailto:sales@africhem-globalz.com">sales@africhem-globalz.com</a><a href="tel:+916362830638">+91 63628 30638</a><span>{clientContent.network.summary}</span></p></div><div className="about-closing-actions"><QuoteLink label="Discuss Your Requirement" /><Link className="text-arrow" href="/global-reach">Explore Our Network <span aria-hidden="true">→</span></Link></div></section>
+        </div>
+        <QuoteLink label="Discuss Your Requirement" />
+      </section>
     </article>
   );
 }
