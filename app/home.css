@@ -300,3 +300,7 @@
   .home-proof li { gap: 8px; }
   .home-proof .home-icon { width: 28px; height: 28px; }
 }
+
+@media (max-width: 359px) {
+  .home-proof li { flex-direction: column; align-items: start; }
+}
