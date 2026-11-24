@@ -39,7 +39,7 @@ export function Header() {
   }, []);
   useEffect(() => {
     dialog.current?.close();
-    const media = matchMedia("(min-width: 1100px)");
+    const media = matchMedia("(min-width: 1200px)");
     const resize = () => { if (media.matches) { dialog.current?.close(); unlock(); } };
     media.addEventListener("change", resize);
     return () => { media.removeEventListener("change", resize); unlock(); };
@@ -56,12 +56,12 @@ export function Header() {
       <QuoteLink className="header-quote" />
       <button className="menu-button" ref={trigger} onClick={open} aria-label="Open navigation" aria-haspopup="dialog">Menu <span aria-hidden="true">☰</span></button>
     </div>
-    <dialog data-lenis-prevent onClose={unlock} ref={dialog} className="mobile-menu" aria-label="Navigation" onClick={e => { if (e.target === dialog.current) close(); }}>
+    <dialog data-lenis-prevent onClose={unlock} ref={dialog} className="mobile-menu" aria-label="Navigation" onClick={e => { if (e.target === dialog.current || (e.target instanceof Element && e.target.closest(".menu-quote"))) close(); }}>
       <div className="mobile-menu-inner">
         <div className="menu-top"><span>AFRICHEM GLOBALZ</span><button onClick={close} aria-label="Close navigation" autoFocus>Close ×</button></div>
         <nav aria-label="Mobile navigation">{navigation.map((item, i) =>
           <m.div key={item.href} whileHover={{ x: 5 }} transition={{ duration: .2 }}>
-            <Link href={item.href} onClick={close} aria-current={isActive(item.href) ? "page" : undefined}><span>0{i + 1}</span>{item.label}<span aria-hidden="true">↗</span></Link>
+            <Link href={item.href} onClick={close} aria-current={isActive(item.href) ? "page" : undefined}><span aria-hidden="true">0{i + 1}</span>{item.label}<span aria-hidden="true">↗</span></Link>
           </m.div>
         )}</nav>
         <QuoteLink className="menu-quote" />
