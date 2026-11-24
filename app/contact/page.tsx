@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { ContactIcon } from "@/components/SocialLinks";
-import { QuoteLink } from "@/components/QuoteLink";
 import { QuoteForm } from "@/components/quote/QuoteForm";
 import { phoneLink, socialLinks } from "@/lib/socials";
 import { company } from "@/lib/site";
@@ -16,12 +14,6 @@ export const metadata: Metadata = {
 };
 
 const channels = [phoneLink, ...socialLinks];
-const values = [
-  { title: "Trust", text: "Business begins when communication is clear and expectations are realistic." },
-  { title: "Experience", text: "Built on over 10 years of sourcing, business development and international trade experience." },
-  { title: "Commitment", text: "We stay engaged from initial enquiry through commercial discussions and delivery coordination." },
-];
-
 type ContactSearchParams = Promise<Record<string, string | string[] | undefined>>;
 
 function firstValue(value: string | string[] | undefined) {
@@ -39,15 +31,14 @@ export default async function ContactPage({ searchParams }: { searchParams: Cont
       <header className="revision-hero wrap">
         <p className="revision-kicker">CONTACT AFRICHEM GLOBALZ</p>
         <h1>Tell us what you&apos;re looking for.</h1>
-        <p>Whether you&apos;re sourcing chemicals, exploring trade opportunities or evaluating supply options, every successful order begins with a conversation. Share your requirement and we&apos;ll help clarify specifications, documentation and delivery considerations before moving forward.</p>
-        <p className="revision-kicker">SOURCING SIMPLIFIED.</p>
+        <p>Share your product, specification, quantity and destination. We&apos;ll help clarify sourcing options, documentation and delivery considerations.</p>
       </header>
 
       <section className="revision-section wrap quote-layout surface-band surface-band--cool" id="quote" aria-labelledby="quote-title">
         <div>
           <p className="revision-kicker">GET A QUOTE</p>
           <h2 id="quote-title">Start with the details.</h2>
-          <p className="revision-lead">A useful sourcing conversation begins with understanding your requirement. Share the product, specification, quantity and destination. Fields marked * are required.</p>
+          <p className="revision-lead">Tell us about your requirement. Fields marked * are required.</p>
         </div>
         <QuoteForm
           key={JSON.stringify([category, product, destination])}
@@ -89,7 +80,7 @@ export default async function ContactPage({ searchParams }: { searchParams: Cont
               <li>We respond with available sourcing options.</li>
               <li>We continue the conversation until you have the information you need.</li>
             </ol>
-            <p className="what-next-note">No pressure. No sales language. Just confidence.</p>
+            <p className="what-next-note">Our team brings over 10 years of sourcing, business development and international trade experience to the conversation.</p>
           </div>
           {companyIdentity.legalName && (
             <div className="contact-identity">
@@ -103,54 +94,6 @@ export default async function ContactPage({ searchParams }: { searchParams: Cont
         </div>
       </section>
 
-      <section className="revision-section wrap surface-band surface-band--warm">
-        <div className="revision-section-head">
-          <p className="revision-kicker">WHY CLIENTS CONTACT AFRICHEM</p>
-          <h2>Clear conversations from the start.</h2>
-        </div>
-        <div className={styles.values}>
-          {values.map(item => (
-            <div key={item.title}>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="revision-section wrap surface-band surface-band--cool">
-        <div className="revision-section-head">
-          <p className="revision-kicker">BEFORE YOU SUBMIT THAT ENQUIRY</p>
-          <h2>People buy from people.</h2>
-        </div>
-        <p className="revision-lead">For more than a decade, I&apos;ve worked with suppliers, buyers, logistics partners and business owners across multiple markets. The biggest lesson I&apos;ve learned is simple: people buy from people. Products, pricing and documentation matter, but trust matters most. When you contact Africhem Globalz, you&apos;re not entering a ticketing system. You&apos;re starting a conversation with people who understand international trade and genuinely want to help make business easier.</p>
-        <p className="revision-kicker">Founder · Africhem Globalz</p>
-      </section>
-
-      <section className="contact-principle wrap">
-        <div className="revision-section-head">
-          <p className="revision-kicker">OUR APPROACH</p>
-          <h2>Business is complicated. Working together shouldn&apos;t be.</h2>
-        </div>
-        <p>Whether you&apos;re looking for a supplier, exploring a new market or reviewing sourcing options, our goal remains the same: make the process simpler, make communication clearer, make decisions easier and make business better.</p>
-      </section>
-
-      <section className="revision-closing wrap contact-closing">
-        <div>
-          <p className="revision-kicker">SOURCING SIMPLIFIED. RELATIONSHIPS BUILT. BUSINESS MADE EASIER.</p>
-          <h2>Ready to start?</h2>
-          <p>Tell us about the material. Tell us about the destination. Tell us about the challenge. We&apos;ll take it from there.</p>
-          <p className="closing-contact">
-            <a href="mailto:sales@africhem-globalz.com"><ContactIcon name="email" />sales@africhem-globalz.com</a>
-            <a href="tel:+916362830638"><ContactIcon name="phone" />+91 63628 30638</a>
-            <span>India · Kenya · Uganda · UAE · Kuwait · Egypt · United Kingdom</span>
-          </p>
-        </div>
-        <div className="contact-closing-actions">
-          <QuoteLink label="Discuss Your Requirement" category={category} product={product} destination={destination} />
-          <Link className="text-arrow" href="/global-reach">Explore Our Network <span aria-hidden="true">→</span></Link>
-        </div>
-      </section>
     </article>
   );
 }
