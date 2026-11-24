@@ -1,28 +1,114 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { chemicalProducts } from "@/lib/chemical-catalogue";
-import { ChemicalDeck } from "@/components/products/ChemicalDeck";
 import { ProductFAQ } from "@/components/products/ProductFAQ";
 import { QuoteLink } from "@/components/QuoteLink";
 import { buyerSteps } from "@/lib/verified-content";
-import "./products.css";
+import { productCategories } from "./catalogue";
 import "./personal-products.css";
 
-export const metadata: Metadata = { title: "Industrial Chemical Products", description: "Explore featured sourcing options and discuss specifications, documentation and delivery with Africhem Globalz.", alternates: { canonical: "/products" } };
+export const metadata: Metadata = {
+  title: "Industrial Chemical Products",
+  description: "Explore featured sourcing options and discuss specifications, documentation and delivery with Africhem Globalz.",
+  alternates: { canonical: "/products" },
+};
+
+const support = ["Verified Supply Partners", "Technical Documentation Support", "Global Shipping Coordination", "Dedicated Point of Contact"];
+const pricing = ["Product specifications", "Supplier options", "Quantity requirements", "Delivery terms", "Export documentation", "Logistics considerations"];
+const people = ["Direct communication", "Documentation guidance", "Logistics coordination", "Long-term relationship focus"];
+
+function CheckList({ items }: { items: readonly string[] }) {
+  return <ul className="products-checks" role="list">
+    {items.map(item => <li key={item}><span aria-hidden="true">✓</span>{item}</li>)}
+  </ul>;
+}
+
 export default function ProductsPage() {
-  const cards = [
-    { id: "solvents", name: "Solvents", description: "Acetone · IPA · Methanol · Ethyl Acetate. Supporting manufacturing, coatings, printing and industrial applications.", image: "/stock/industrial-tanks-sunset.webp", href: "/products/solvents", quoteCategory: "solvents", eyebrow: "SOLVENTS" },
-    { id: "thinners-white-spirit", name: "Thinners & White Spirit", description: "Solutions for paints, coatings and surface treatment industries.", image: "/stock/port-logistics.webp", href: "/products/solvents/white-spirit", quoteCategory: "solvents", quoteProduct: "white-spirit", eyebrow: "THINNERS & WHITE SPIRIT" },
-    { id: "industrial-chemicals", name: "Industrial Chemicals", description: "Bulk chemicals for manufacturing and industrial operations. Share your requirement to discuss available options.", image: "/materials/chemical-transfer.webp", href: "/products/industrial-chemicals", quoteCategory: "industrial-chemicals", eyebrow: "INDUSTRIAL CHEMICALS" },
-    { id: "specialty-sourcing", name: "Specialty Sourcing", description: "Share your specifications and destination. We'll help identify sourcing options.", image: "/stock/industrial-refinery.webp", href: "/products/custom-sourcing", quoteCategory: "custom-sourcing", eyebrow: "SPECIALTY SOURCING" },
-  ] as const;
-  return <article className="products-page personal-products"><header className="products-hero wrap"><div className="products-topline"><span>AFRICHEM GLOBALZ / PRODUCTS</span><span>01—04 SOURCING OPTIONS</span></div><div className="products-hero-main"><p className="products-label">PRODUCTS</p><h1>Tell us what you need. We&apos;ll help source the right solution.</h1><div className="products-hero-copy"><p>Whether you&apos;re sourcing solvents, polymers, specialty chemicals or industrial raw materials, our team can help you discuss specifications, documentation and delivery requirements before you commit to an order.</p><p>Choose a category or share a custom sourcing request.</p><QuoteLink label="Request Pricing" /></div></div></header>
-    <section className="products-trust wrap" aria-label="Sourcing support"><div><span aria-hidden="true">✓</span><p>Verified Supply Partners</p></div><div><span aria-hidden="true">✓</span><p>Technical Documentation Support</p></div><div><span aria-hidden="true">✓</span><p>Global Shipping Coordination</p></div><div><span aria-hidden="true">✓</span><p>Dedicated Point of Contact</p></div></section>
-    <ChemicalDeck cards={cards} label="Six chemical sourcing categories" />
-    <section className="products-confirmed wrap" aria-labelledby="confirmed-title"><div className="products-confirmed-head"><p className="products-label">SOLVENTS</p><h2 id="confirmed-title">Products for a specific conversation.</h2><p>Acetone, IPA, Methanol, Ethyl Acetate, White Spirit and Thinner. Share the application, quantity and destination to discuss the relevant specifications and available details.</p></div><div className="products-confirmed-list">{chemicalProducts.map(product => <article key={product.slug}><span>{product.slug === "white-spirit" || product.slug === "thinner" ? "THINNERS & WHITE SPIRIT" : "SOLVENTS"}</span><h3>{product.name}</h3><p>{product.typicalUse}</p><div><Link href={"/products/" + product.family + "/" + product.slug}>Product details <span aria-hidden="true">→</span></Link><QuoteLink category={product.family} product={product.slug} /></div></article>)}</div><p className="products-document-note">Grades, availability and product-specific documents are discussed for each enquiry. No public COA, TDS or SDS download is presented here.</p></section>
-    <section className="products-confirmed wrap" aria-labelledby="buyers-title"><div className="products-confirmed-head"><p className="products-label">BEFORE PRICING AND SHIPMENT</p><h2 id="buyers-title">What buyers work through with us.</h2><p>Most sourcing challenges happen before an order is placed. We help buyers review:</p><ul><li>Product specifications</li><li>Supplier options</li><li>Quantity requirements</li><li>Delivery terms</li><li>Export documentation</li><li>Logistics considerations</li></ul></div><div className="products-confirmed-head"><p className="products-label">AFTER YOU SUBMIT A REQUEST</p><h2>Review the details, then decide.</h2><ol>{buyerSteps.map(step => <li key={step.number}><strong>{step.title}.</strong> {step.description}</li>)}</ol></div></section>
-    <section className="products-faq wrap"><div><p className="products-label">BUYER QUESTIONS</p><h2>What to ask before a quote.</h2></div><ProductFAQ /></section>
-    <section className="products-people wrap" aria-labelledby="products-people-title"><div><p className="products-label">PEOPLE BUY FROM PEOPLE</p><h2 id="products-people-title">International trade involves more than finding a supplier.</h2></div><div><p>Africhem was built by professionals with hands-on experience in sourcing, supplier coordination, export documentation and global trade. When you contact us, you&apos;re connected with real people who understand the process from enquiry to shipment.</p><ul><li>Direct communication</li><li>Documentation guidance</li><li>Logistics coordination</li><li>Long-term relationship focus</li></ul></div></section>
-    <section className="products-close wrap"><p className="products-label">REQUEST A QUOTATION</p><h2>Bring us the material and the detail.</h2><div><p>Share your grade, quantity and destination; our team can discuss the available product information and quotation options.</p><QuoteLink /></div></section>
-  </article>;
+  return (
+    <article className="product-directory">
+      <header className="products-intro wrap">
+        <div>
+          <p className="products-label">PRODUCTS</p>
+          <h1>Tell us what you need. We&apos;ll help source the right solution.</h1>
+        </div>
+        <div>
+          <p>Whether you&apos;re sourcing solvents, polymers, specialty chemicals or industrial raw materials, our team can help you discuss specifications, documentation and delivery requirements before you commit to an order.</p>
+          <p>Choose a category or share a custom sourcing request.</p>
+          <QuoteLink label="Request Pricing" />
+        </div>
+      </header>
+
+      <section className="products-support wrap" aria-label="Sourcing support">
+        <CheckList items={support} />
+      </section>
+
+      <section className="products-categories wrap" aria-label="Product categories">
+        <ul className="product-category-grid" role="list">
+          {productCategories.map(category => (
+            <li key={category.slug}>
+              <Link className="product-category-link" href={`/products/${category.slug}`}>
+                <div className="product-category-image">
+                  <Image src={category.image} alt="" fill sizes="(max-width: 599px) 92vw, (max-width: 999px) 46vw, (max-width: 1279px) 30vw, 23vw" />
+                </div>
+                <div className="product-category-copy">
+                  <h2>{category.name}</h2>
+                  <p>{category.description}</p>
+                  <span className="product-category-arrow" aria-hidden="true">→</span>
+                </div>
+              </Link>
+              <QuoteLink label="Get a Quote" category={category.quoteCategory} />
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <div className="products-process-band">
+        <div className="products-process wrap">
+          <section aria-labelledby="buyers-title">
+            <p className="products-label">BEFORE PRICING AND SHIPMENT</p>
+            <h2 id="buyers-title">What buyers work through with us.</h2>
+            <p>Most sourcing challenges happen before an order is placed. We help buyers review:</p>
+            <CheckList items={pricing} />
+          </section>
+          <section aria-labelledby="buyer-steps-title">
+            <p className="products-label">AFTER YOU SUBMIT A REQUEST</p>
+            <h2 id="buyer-steps-title">Review the details, then decide.</h2>
+            <ol className="products-steps" role="list">
+              {buyerSteps.map(step => (
+                <li key={step.number}>
+                  <span className="product-step-number" aria-hidden="true">{step.number}</span>
+                  <div><strong>{step.title}.</strong> {step.description}</div>
+                </li>
+              ))}
+            </ol>
+          </section>
+        </div>
+      </div>
+
+      <div className="products-commercial wrap">
+        <section aria-labelledby="products-people-title">
+          <p className="products-label">PEOPLE BUY FROM PEOPLE</p>
+          <h2 id="products-people-title">International trade involves more than finding a supplier.</h2>
+          <p>Africhem was built by professionals with hands-on experience in sourcing, supplier coordination, export documentation and global trade. When you contact us, you&apos;re connected with real people who understand the process from enquiry to shipment.</p>
+          <CheckList items={people} />
+        </section>
+        <section className="products-quotation" aria-labelledby="products-quote-title">
+          <p className="products-label">REQUEST A QUOTATION</p>
+          <h2 id="products-quote-title">Bring us the material and the detail.</h2>
+          <p>Share your grade, quantity and destination; our team can discuss the available product information and quotation options.</p>
+          <QuoteLink />
+        </section>
+      </div>
+
+      <div className="products-faq-band">
+        <section className="products-faq wrap" aria-labelledby="products-faq-title">
+          <div>
+            <p className="products-label">BUYER QUESTIONS</p>
+            <h2 id="products-faq-title">What to ask before a quote.</h2>
+          </div>
+          <ProductFAQ />
+        </section>
+      </div>
+    </article>
+  );
 }
