@@ -1,4 +1,4 @@
-import { quoteTransportReady, validateQuote } from "@/lib/quote";
+import { getQuoteProfile, quoteTransportReady, validateQuote } from "@/lib/quote";
 export const runtime = "nodejs";
 const recent = new Map<string, number>();
 export async function POST(request: Request) {
@@ -35,7 +35,11 @@ export async function POST(request: Request) {
   if (recent.size > 1000) for (const [key, time] of recent) if (now - time > 60000) recent.delete(key);
   if (now - (recent.get(ip) ?? 0) < 30000) return Response.json({ error: "Please wait before sending another request." }, { status: 429 });
   recent.set(ip, now);
-  const lines = ["New Africhem Globalz quotation enquiry", "", ...Object.entries(values).filter(([key]) => key !== "website").map(([key, value]) => `${key}: ${value || "—"}`)];
+  const { hasQuantity } = getQuoteProfile(values.category);
+  const details = Object.entries(values)
+    .filter(([key]) => key !== "website" && (hasQuantity || (key !== "quantity" && key !== "unit")))
+    .map(([key, value]) => `${key}: ${value || "—"}`);
+  const lines = ["New Africhem Globalz quotation enquiry", "", ...details];
   try {
     const response = await fetch("https://api.resend.com/emails", { method: "POST", signal: AbortSignal.timeout(10000), headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, "Content-Type": "application/json" }, body: JSON.stringify({ from: process.env.ENQUIRY_FROM_EMAIL, to: [process.env.ENQUIRY_TO_EMAIL], subject: "Africhem Globalz quotation enquiry", text: lines.join("\n") }) });
     if (!response.ok) { recent.delete(ip); return Response.json({ error: "The enquiry could not be sent. Please retry or use direct contact." }, { status: 502 }); }
