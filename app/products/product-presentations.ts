@@ -32,7 +32,7 @@ export const productPresentations: Record<string, ProductPresentation> = {
   "MDC (Methylene Dichloride)": { description: "Discuss required grade, quantity and application.", image: solvents },
   "M-Xylene": { description: "Aromatic solvent enquiries for industrial use.", image: industrial },
   Toluene: { description: "Solvent enquiries based on your specification and use.", image: transfer },
-  BTX: { description: "Discuss the required aromatic material and specification.", image: coatings },
+  BTX: { description: "Discuss the required aromatic material and specification.", image: refinery },
   "White Spirit": { description: "Solvent enquiries for coatings and surface treatment.", image: solvents },
   Thinners: { description: "Share the coating system and required thinner type.", image: industrial },
   "NC Thinner": { description: "Thinner enquiries for compatible coating systems.", image: transfer },
