@@ -103,7 +103,7 @@ export default function AboutPage() {
             <h2>Different industries. One approach.</h2>
           </div>
           <p className="revision-lead">Trusted relationships. Practical solutions. Reliable execution. From chemicals and footwear to agriculture, logistics and recycling, our focus is on making business simpler.</p>
-          <Link className="text-arrow" href="/other-businesses">Explore Other Businesses <span aria-hidden="true">→</span></Link>
+          <Link className="text-arrow" href="/other-businesses">Explore Other Businesses and Partners <span aria-hidden="true">→</span></Link>
         </section>
       </div>
       <div className="revision-section wrap surface-band surface-band--warm about-principles">
