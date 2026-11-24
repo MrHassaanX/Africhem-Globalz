@@ -13,102 +13,86 @@ export const metadata: Metadata = {
   alternates: { canonical: "/products" },
 };
 
-const support = ["Verified Supply Partners", "Technical Documentation Support", "Global Shipping Coordination", "Dedicated Point of Contact"];
+const categories = productCategories.filter(category => category.slug !== "custom-sourcing");
+const support = ["Verified supply partners", "Technical documentation support", "Global shipping coordination", "Dedicated point of contact"];
 const pricing = ["Product specifications", "Supplier options", "Quantity requirements", "Delivery terms", "Export documentation", "Logistics considerations"];
-const people = ["Direct communication", "Documentation guidance", "Logistics coordination", "Long-term relationship focus"];
 
 function CheckList({ items }: { items: readonly string[] }) {
-  return <ul className="products-checks" role="list">
-    {items.map(item => <li key={item}><span aria-hidden="true">✓</span>{item}</li>)}
-  </ul>;
+  return (
+    <ul className="products-checks" role="list">
+      {items.map(item => <li key={item}><span aria-hidden="true">✓</span>{item}</li>)}
+    </ul>
+  );
 }
 
 export default function ProductsPage() {
   return (
     <article className="product-directory">
       <header className="products-intro wrap">
-        <div>
-          <p className="products-label">PRODUCTS</p>
-          <h1>Tell us what you need. We&apos;ll help source the right solution.</h1>
-        </div>
-        <div>
-          <p>Whether you&apos;re sourcing solvents, polymers, specialty chemicals or industrial raw materials, our team can help you discuss specifications, documentation and delivery requirements before you commit to an order.</p>
-          <p>Choose a category or share a custom sourcing request.</p>
-          <QuoteLink label="Request Pricing" />
-        </div>
+        <h1>Industrial Chemical Products</h1>
+        <p>Browse our chemical and raw material categories, or send us your requirements for a custom sourcing enquiry.</p>
       </header>
-
-      <section className="products-support wrap" aria-label="Sourcing support">
-        <CheckList items={support} />
-      </section>
 
       <section className="products-categories wrap" aria-label="Product categories">
         <ul className="product-category-grid" role="list">
-          {productCategories.map(category => (
+          {categories.map(category => (
             <li key={category.slug}>
               <Link className="product-category-link" href={`/products/${category.slug}`}>
                 <div className="product-category-image">
-                  <Image src={category.image} alt="" fill sizes="(max-width: 599px) 92vw, (max-width: 999px) 46vw, (max-width: 1279px) 30vw, 23vw" />
+                  <Image
+                    src={category.image}
+                    alt=""
+                    fill
+                    sizes="(max-width: 599px) 92vw, (max-width: 999px) 46vw, (max-width: 1440px) 30vw, 440px"
+                  />
                 </div>
                 <div className="product-category-copy">
-                  <h2>{category.name}</h2>
+                  <h2>{category.name}<span className="product-category-arrow" aria-hidden="true">→</span></h2>
                   <p>{category.description}</p>
-                  <span className="product-category-arrow" aria-hidden="true">→</span>
                 </div>
               </Link>
-              <QuoteLink label="Get a Quote" category={category.quoteCategory} />
+              <QuoteLink category={category.quoteCategory} />
             </li>
           ))}
         </ul>
+
+        <section className="products-sourcing" aria-labelledby="specialty-sourcing">
+          <div>
+            <h2 id="specialty-sourcing"><Link href="/products/custom-sourcing">Specialty Sourcing</Link></h2>
+            <p>Looking for a different material? Share the grade, quantity and destination so we can discuss sourcing options.</p>
+          </div>
+          <QuoteLink label="Request Pricing" category="custom-sourcing" />
+        </section>
       </section>
 
-      <div className="products-process-band">
+      <section className="products-process-band" aria-labelledby="sourcing-review">
         <div className="products-process wrap">
-          <section aria-labelledby="buyers-title">
-            <p className="products-label">BEFORE PRICING AND SHIPMENT</p>
-            <h2 id="buyers-title">What buyers work through with us.</h2>
-            <p>Most sourcing challenges happen before an order is placed. We help buyers review:</p>
-            <CheckList items={pricing} />
-          </section>
-          <section aria-labelledby="buyer-steps-title">
-            <p className="products-label">AFTER YOU SUBMIT A REQUEST</p>
-            <h2 id="buyer-steps-title">Review the details, then decide.</h2>
-            <ol className="products-steps" role="list">
-              {buyerSteps.map(step => (
-                <li key={step.number}>
-                  <span className="product-step-number" aria-hidden="true">{step.number}</span>
-                  <div><strong>{step.title}.</strong> {step.description}</div>
-                </li>
-              ))}
-            </ol>
-          </section>
-        </div>
-      </div>
-
-      <div className="products-commercial wrap">
-        <section aria-labelledby="products-people-title">
-          <p className="products-label">PEOPLE BUY FROM PEOPLE</p>
-          <h2 id="products-people-title">International trade involves more than finding a supplier.</h2>
-          <p>Africhem was built by professionals with hands-on experience in sourcing, supplier coordination, export documentation and global trade. When you contact us, you&apos;re connected with real people who understand the process from enquiry to shipment.</p>
-          <CheckList items={people} />
-        </section>
-        <section className="products-quotation" aria-labelledby="products-quote-title">
-          <p className="products-label">REQUEST A QUOTATION</p>
-          <h2 id="products-quote-title">Bring us the material and the detail.</h2>
-          <p>Share your grade, quantity and destination; our team can discuss the available product information and quotation options.</p>
-          <QuoteLink />
-        </section>
-      </div>
-
-      <div className="products-faq-band">
-        <section className="products-faq wrap" aria-labelledby="products-faq-title">
-          <div>
-            <p className="products-label">BUYER QUESTIONS</p>
-            <h2 id="products-faq-title">What to ask before a quote.</h2>
+          <h2 id="sourcing-review">From enquiry to shipment</h2>
+          <div className="products-process-columns">
+            <section aria-labelledby="buyers-title">
+              <h3 id="buyers-title">What we review before pricing</h3>
+              <CheckList items={pricing} />
+            </section>
+            <section aria-labelledby="buyer-steps-title">
+              <h3 id="buyer-steps-title">What happens after you enquire</h3>
+              <ol className="products-steps">
+                {buyerSteps.map(step => (
+                  <li key={step.number}><strong>{step.title}.</strong> {step.description}</li>
+                ))}
+              </ol>
+            </section>
           </div>
-          <ProductFAQ />
-        </section>
-      </div>
+          <p>Our team has hands-on experience in sourcing, supplier coordination, export documentation and global trade.</p>
+          <div className="products-support" aria-label="Sourcing support">
+            <CheckList items={support} />
+          </div>
+        </div>
+      </section>
+
+      <section className="products-faq wrap" aria-labelledby="products-faq-title">
+        <h2 id="products-faq-title">Buyer questions</h2>
+        <ProductFAQ />
+      </section>
     </article>
   );
 }

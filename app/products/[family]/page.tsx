@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { QuoteLink } from "@/components/QuoteLink";
@@ -36,60 +37,62 @@ export default async function FamilyPage({ params }: FamilyPageProps) {
   );
   const customSourcing = family === "custom-sourcing";
 
+  const products = category.products.map(name => ({
+    name,
+    detail: details.find(product => product.name === name || (name === "Thinners" && product.slug === "thinner")),
+  }));
+  const additionalDetails = details.filter(detail => !products.some(product => product.detail === detail));
+
   return (
-    <article className="revision-page product-category">
-      <header className="revision-hero wrap">
-        <p className="revision-kicker"><Link href="/products">PRODUCTS</Link> / {category.name.toUpperCase()}</p>
-        <h1>{category.name}</h1>
-        <p>{category.description}</p>
-        <QuoteLink category={category.quoteCategory} />
+    <article className="product-category">
+      <header className="category-intro wrap">
+        <div>
+          <Link className="category-back" href="/products"><span aria-hidden="true">←</span> All products</Link>
+          <h1>{category.name}</h1>
+          <p>{category.description}</p>
+          <QuoteLink category={category.quoteCategory} />
+        </div>
+        <div className="category-hero-image">
+          <Image src={category.image} alt="" fill sizes="(max-width: 767px) 92vw, (max-width: 1440px) 40vw, 540px" />
+        </div>
       </header>
 
-      <section className="revision-section wrap surface-band surface-band--cool" aria-labelledby="category-products">
-        <div className="revision-section-head">
-          <p className="revision-kicker">{customSourcing ? "START A SOURCING REQUEST" : "NAMED PRODUCTS"}</p>
+      <div className="products-process-band">
+        <section className="category-inventory wrap" aria-labelledby="category-products">
           <h2 id="category-products">
-            {category.products.length ? "Products in this category." : customSourcing ? "Can't find your product?" : "Start with your requirement."}
+            {products.length ? "Products in this category" : customSourcing ? "Can't find your product?" : "Share your requirements"}
           </h2>
-        </div>
-        {category.products.length ? (
-          <ul className="product-item-grid" role="list">
-            {category.products.map(name => <li key={name}>{name}</li>)}
-          </ul>
-        ) : (
-          <div className="empty-family">
+          {products.length ? (
+            <ul className="product-item-grid" role="list">
+              {products.map(({ name, detail }) => (
+                <li key={name}>
+                  {detail ? <Link href={`/products/${detail.family}/${detail.slug}`}>{name}<span aria-hidden="true">→</span></Link> : <span>{name}</span>}
+                </li>
+              ))}
+            </ul>
+          ) : (
             <p>{customSourcing
               ? "Share your product specifications and destination. Our sourcing team will help guide you through the information needed to discuss options."
               : "Share the material, grade and quantity you need. Our team can review the enquiry and clarify information for a specific quotation."}</p>
-            <QuoteLink category={category.quoteCategory} />
-          </div>
-        )}
+          )}
 
-        {details.length > 0 && (
-          <div className="product-detail-links">
-            <h3>Product details</h3>
-            {family === "solvents" && (
-              <>
-                <p>Acetone, IPA, Methanol, Ethyl Acetate, White Spirit and Thinner. Share the application, quantity and destination to discuss the relevant specifications and available details.</p>
-                <p>Grades, availability and product-specific documents are discussed for each enquiry. No public COA, TDS or SDS download is presented here.</p>
-              </>
-            )}
-            <ul role="list">
-              {details.map(product => (
-                <li key={product.slug}><Link href={`/products/${product.family}/${product.slug}`}>{product.name}</Link></li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </section>
-
-      <section className="revision-closing wrap">
-        <div>
-          <p className="revision-kicker">NEED A DIFFERENT CHEMICAL?</p>
-          <h2>Share the detail before we quote.</h2>
-        </div>
-        <QuoteLink category={category.quoteCategory} />
-      </section>
+          {details.length > 0 && (
+            <div className="product-detail-links">
+              <h3>{additionalDetails.length ? "More product details" : "Specifications and availability"}</h3>
+              {family === "solvents" && (
+                <p>Share the application, quantity and destination to discuss grades, availability and product-specific documents such as COAs, TDSs and SDSs.</p>
+              )}
+              {additionalDetails.length > 0 && (
+                <ul role="list">
+                  {additionalDetails.map(product => (
+                    <li key={product.slug}><Link href={`/products/${product.family}/${product.slug}`}>{product.name}</Link></li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
+        </section>
+      </div>
     </article>
   );
 }
