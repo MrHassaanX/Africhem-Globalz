@@ -69,7 +69,6 @@ export function HomeIntro({ children }: { children: React.ReactNode }) {
     <div className="home-material-stage" ref={stage} aria-hidden="true">
       <Image src="/stock/industrial-tanks-sunset.webp" alt="" fill preload sizes="(max-width: 767px) 100vw, 56vw" className="home-material-image" />
       <div className="home-material-wash" />
-      <p className="home-industrial-caption">ILLUSTRATIVE INDUSTRY PHOTOGRAPHY · NOT AN AFRICHEM FACILITY</p>
     </div>
     <section className="home-hero" aria-labelledby="home-title">
       <div className="home-hero-copy">

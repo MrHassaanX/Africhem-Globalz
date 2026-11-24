@@ -60,7 +60,7 @@ export function ChemicalDeck({ cards, label }: { cards: readonly ChemicalDeckCar
   }, []);
   return <section className="products-deck chemical-deck" ref={root} aria-label={label} style={{ "--deck-count": cards.length } as CSSProperties}>
     <ol className="products-deck-stage">{cards.map((card, index) => <li className="products-card" key={card.id}>
-      <div className="products-card-art"><Image src={card.image} alt="" fill sizes="(max-width:767px) 92vw, 50vw" loading={index === 0 ? "eager" : "lazy"} /><span className="products-art-caption">{card.image.startsWith("/materials/") ? "ILLUSTRATIVE MATERIAL STUDY" : "ILLUSTRATIVE INDUSTRY PHOTOGRAPHY"}</span></div>
+      <div className="products-card-art"><Image src={card.image} alt="" fill sizes="(max-width:767px) 92vw, 50vw" loading={index === 0 ? "eager" : "lazy"} /></div>
       <div className="products-card-content"><div className="products-card-top"><span className="products-card-number">{String(index + 1).padStart(2, "0")} / {String(cards.length).padStart(2, "0")}</span><span>AFRICHEM GLOBALZ</span></div>
         <div className="products-card-main"><p className="products-card-status">{card.eyebrow}</p><h2>{card.name}</h2><p className="products-card-description">{card.description}</p></div>
         <div className="chemical-deck-actions"><Link className="products-card-link" href={card.href}>Explore <span aria-hidden="true">→</span></Link><Link href={quoteHref(card.quoteCategory, card.quoteProduct)}>Get a Quote <span aria-hidden="true">→</span></Link></div>

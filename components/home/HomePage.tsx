@@ -5,17 +5,20 @@ import { QuoteLink } from "@/components/QuoteLink";
 import { Reveal } from "@/components/Reveal";
 import { buyerSteps, proofPoints } from "@/lib/verified-content";
 import { clientContent } from "@/lib/content/company";
+import { HomeIcon, type HomeIconName } from "./HomeIcon";
 import "@/app/home.css";
 import "@/app/personal-home.css";
 
 export function HomePage() {
+  const proofIcons: Record<string, HomeIconName> = { "Verified Suppliers": "shield", "Documentation Support": "document" };
+  const processIcons: HomeIconName[] = ["document", "shield", "globe", "network"];
   return <div className="home-page">
     <HomeIntro>
-    <section className="home-proof" aria-label="How we support sourcing"><div className="home-container">{proofPoints.filter(point => point.approved && point.public).map(point => <div key={point.text}><span aria-hidden="true">✓</span><p>{point.text}</p></div>)}</div></section>
+    <section className="home-proof" aria-label="How we support sourcing"><div className="home-container">{proofPoints.filter(point => point.approved && point.public).map(point => <div key={point.text}><HomeIcon name={proofIcons[point.text] ?? "spark"} /><p>{point.text}</p></div>)}</div></section>
       <section className="home-capabilities" aria-labelledby="capabilities-title"><div className="home-container">
         <div className="home-capabilities-head"><p className="home-kicker">INTERNATIONAL SOURCING MADE SIMPLE</p><h2 id="capabilities-title">From requirement <em>to delivery.</em></h2><p>Tell us what you need. We review the request, share pricing and details, then coordinate next steps with you.</p></div>
         <div className="home-process-line" aria-hidden="true"><span /></div>
-        <ol className="home-capability-list">{buyerSteps.map(step => <li className="capability-row" key={step.number}><span>{step.number}</span><h3><span>{step.title}</span></h3><p>{step.description}</p></li>)}</ol>
+        <ol className="home-capability-list">{buyerSteps.map((step, index) => <li className="capability-row" key={step.number}><span className="capability-icon"><HomeIcon name={processIcons[index] ?? "spark"} /></span><h3><span>{step.title}</span></h3><p>{step.description}</p></li>)}</ol>
         <div className="home-process-action"><QuoteLink label="Start with Step 1: Get a Quote" /><Link href="/how-it-works">See How It Works <span aria-hidden="true">→</span></Link></div>
       </div></section>
     </HomeIntro>
@@ -24,7 +27,7 @@ export function HomePage() {
       <ChemicalCarousel label="Six chemical sourcing categories" />
       <div className="home-categories-tail home-container"><p>Have a specific grade or application in mind?</p><Link href="/products">Explore Products <span aria-hidden="true">→</span></Link></div>
     </section>
-    <section className="home-business-preview home-container"><div><p className="home-kicker">OTHER BUSINESSES</p><h2>Building businesses through trade, distribution and supply.</h2><p>Chemicals, Walkmate footwear distribution, agro commodities, logistics and recycling have their own directory alongside our primary chemical sourcing work.</p></div><Link href="/other-businesses">Explore Other Businesses <span aria-hidden="true">→</span></Link></section>
+    <section className="home-business-preview home-container"><div><p className="home-kicker">OTHER BUSINESSES</p><h2>More ways to help you move business.</h2><p>Beyond chemicals, we work across footwear distribution, agro commodities, logistics and recycling. Tell us what you need and we&apos;ll point you to the right conversation.</p></div><Link href="/other-businesses">Explore Other Businesses <span aria-hidden="true">→</span></Link></section>
     <section className="home-client-first home-container"><p className="home-kicker">OUR FIRST PRINCIPLE</p><blockquote>{clientContent.clientFirst}</blockquote></section>
     <section className="home-closing" aria-labelledby="closing-title"><div className="home-container home-closing-inner"><p className="home-kicker">START A CONVERSATION</p><h2 id="closing-title">Tell us what you need.</h2><div><p>Share the material, quantity and destination. We’ll take the conversation from there.</p><QuoteLink /></div></div></section>
   </div>;

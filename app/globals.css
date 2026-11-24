@@ -65,17 +65,6 @@ h1, h2 { font-family: var(--font-display), Arial, sans-serif; font-weight: 450; 
 .button span, .text-link span { font-size: 20px; }
 .text-link { display: inline-flex; align-items: center; gap: 25px; padding-block: 12px; font-size: 13px; border-bottom: 1px solid var(--line); }
 .text-link:hover { border-color: var(--cyan); }
-.material-study { position: relative; aspect-ratio: .94; background: #081c29; overflow: hidden; color: #f1f5f4; }
-.material-fallback { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; gap: 14px; background: radial-gradient(ellipse at 70% 45%, #114d64 0%, #081c29 55%, #06111a 100%); }
-.material-fallback::after { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 35%, #78cee50b 49%, transparent 60%); }
-.material-fallback i { display: block; width: 10%; height: 54%; transform: skewY(-22deg) rotate(-12deg); border-left: 1px solid #8ed9ec88; border-top: 1px solid #8ed9ec55; background: linear-gradient(100deg, #08293999, #07678066 40%, #88d2e64d 43%, #071a29 49%, #0a475d99 94%, #61c6dd66); box-shadow: 18px 20px 28px #020c1466, inset 1px 0 8px #79ddec22; }
-.material-fallback i:nth-child(2), .material-fallback i:nth-child(4) { height: 64%; }
-.material-fallback i:nth-child(3) { height: 75%; }
-.study-caption { position: absolute; z-index: 2; left: 24px; top: 24px; right: 24px; display: flex; justify-content: space-between; gap: 15px; color: #bed4db; font-size: 9px; letter-spacing: .09em; }
-.scene-control { position: absolute; z-index: 2; bottom: 25px; left: 24px; right: 24px; display: flex; align-items: center; justify-content: space-between; background: transparent; color: #d4e4e9; border: 0; border-bottom: 1px solid #547482; padding: 14px 0; font-size: 11px; }
-.scene-control span { font-size: 18px; }
-.scene-canvas { position: absolute; inset: 0; }
-.scene-unavailable { position: absolute; inset: auto 24px 84px; font-size: 12px; }
 .study-bottom { display: flex; justify-content: space-between; gap: 20px; padding: 24px 0; border-top: 1px solid var(--line); font-size: 10px; letter-spacing: .08em; color: var(--muted); }
 .study-bottom span:last-child span { margin-left: 30px; font-size: 18px; }
 .system-section { padding-top: 100px; padding-bottom: 100px; }
@@ -151,7 +140,6 @@ h1, h2 { font-family: var(--font-display), Arial, sans-serif; font-weight: 450; 
   .study-copy h1 { font-size: clamp(52px, 7vw, 78px); }
   .study-copy > .eyebrow { max-width: 240px; }
   .study-actions { gap: 15px; }
-  .study-caption { flex-direction: column; gap: 6px; }
   .section-heading { grid-template-columns: 1fr 1.6fr; }
 }
 @media(max-width: 767px) {
@@ -162,8 +150,6 @@ h1, h2 { font-family: var(--font-display), Arial, sans-serif; font-weight: 450; 
   .study-copy h1 { font-size: clamp(48px, 12.6vw, 94px); margin-right: 0; margin-bottom: 24px; }
   .study-copy > .eyebrow { max-width: none; font-size: 9px; margin-bottom: 25px; }
   .study-description { font-size: 16px; }
-  .material-study { aspect-ratio: 1.2; }
-  .study-caption { flex-direction: row; }
   .study-bottom { font-size: 9px; align-items: start; }
   .study-bottom > span { max-width: 45%; line-height: 1.7; }
   .study-bottom span:last-child span { margin-left: 8px; }
@@ -197,7 +183,6 @@ h1, h2 { font-family: var(--font-display), Arial, sans-serif; font-weight: 450; 
   .menu-button { font-size: 12px; gap: 7px; padding-inline: 3px; }
   .study-copy h1 { font-size: 12.3vw; }
   .study-actions { flex-direction: column; align-items: start; }
-  .study-caption { font-size: 8px; left: 16px; right: 16px; gap: 8px; }
   .eyebrow-line > .eyebrow { font-size: 9px; }
 }
 @media(prefers-reduced-motion: reduce) {
@@ -206,8 +191,7 @@ h1, h2 { font-family: var(--font-display), Arial, sans-serif; font-weight: 450; 
 }
 html[data-menu-open="true"], html[data-menu-open="true"] body { overflow: hidden; }
 .mobile-menu { overflow-y: auto; overscroll-behavior: contain; }
-.study-caption, .study-copy > .eyebrow, .study-bottom, .swatch-names, .review-label, .eyebrow-line > .eyebrow { font-size: 11px; }
-.study-caption { flex-wrap: wrap; }
+.study-copy > .eyebrow, .study-bottom, .swatch-names, .review-label, .eyebrow-line > .eyebrow { font-size: 11px; }
 @media(max-width: 374px) { .eyebrow-line { flex-wrap: wrap; gap: 8px; } }
 
 /* The revision's shared buyer controls and canonical page language. */
