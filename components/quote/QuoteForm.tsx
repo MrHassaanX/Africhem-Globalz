@@ -49,6 +49,19 @@ export function QuoteForm({ enabled, initialCategory, initialProduct, initialDes
 
   function change(key: keyof QuoteFields, value: string) {
     if (key === "category" || key === "product") {
+      const choosingFirstCategory = key === "category" && !category && Boolean(value);
+      const choosingFirstProduct = key === "product" && !product && Boolean(value);
+      if (choosingFirstCategory || choosingFirstProduct) {
+        const nextDraft = key === "category"
+          ? draftKey(value, selectedProducts[value] ?? "")
+          : draftKey(category, value);
+        setDrafts(previous => {
+          if (previous[nextDraft] || !previous[activeDraft]) return previous;
+          const updated = { ...previous, [nextDraft]: previous[activeDraft] };
+          delete updated[activeDraft];
+          return updated;
+        });
+      }
       if (key === "category") setCategory(value);
       else setSelectedProducts(previous => ({ ...previous, [category]: value }));
       setErrors({});
