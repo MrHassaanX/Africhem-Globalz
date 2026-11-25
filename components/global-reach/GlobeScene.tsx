@@ -6,6 +6,15 @@ import * as THREE from "three";
 import { networkArcs, networkLocations, type Coordinate } from "@/lib/globe/locations";
 
 type Props = { dark: boolean; active: boolean; reducedMotion: boolean; onSelectionChange: (index: number | null) => void };
+type LabelRefs = { current: Array<HTMLDivElement | null> };
+type LabelPosition = { x: number; y: number; width: number; height: number };
+const labelOffsets = [0, -26, 26, -50, 50];
+
+function overlaps(a: LabelPosition, b: LabelPosition) {
+  return a.x < b.x + b.width + 3 && a.x + a.width + 3 > b.x
+    && a.y < b.y + b.height + 3 && a.y + a.height + 3 > b.y;
+}
+
 type RotationControl = { yaw: number; velocity: number; dragging: boolean; resumeAt: number; autoBlend: number };
 const revolutionSeconds = 42;
 
@@ -28,8 +37,11 @@ function createRoutes() {
   });
 }
 
-function GlobeObject({ active, reducedMotion, mobile, dark, getControl, select }: Props & { mobile: boolean; dark: boolean; getControl: () => RotationControl; select: (index: number) => void }) {
+function GlobeObject({ active, reducedMotion, mobile, dark, getControl, select, labels }: Props & { mobile: boolean; labels: LabelRefs; getControl: () => RotationControl; select: (index: number) => void }) {
   const globe = useRef<THREE.Group>(null);
+  const projected = useMemo(() => new THREE.Vector3(), []);
+  const markers = useMemo(() => networkLocations.map(() => ({ x: 0, y: 0, visible: false })), []);
+  const occupied = useRef<LabelPosition[]>([]);
   const firstFrame = useRef<string | null>(null);
   const elapsed = useRef(0);
   const routeMaterials = useRef<Array<THREE.MeshBasicMaterial | null>>([]);
@@ -52,8 +64,9 @@ function GlobeObject({ active, reducedMotion, mobile, dark, getControl, select }
     routes.forEach(({ geometry }) => geometry.dispose());
   }, [earthTexture, routes]);
 
-  useFrame((_, delta) => {
-    if (!globe.current) return;
+  useFrame(({ camera, size }, delta) => {
+    const group = globe.current;
+    if (!group) return;
     const step = Math.min(delta, .08);
     const rotation = getControl();
     if (active && !reducedMotion) {
@@ -69,8 +82,54 @@ function GlobeObject({ active, reducedMotion, mobile, dark, getControl, select }
       }
     }
     const time = elapsed.current;
-    globe.current.rotation.y = rotation.yaw;
-    globe.current.rotation.x = -.07;
+    group.rotation.y = rotation.yaw;
+    group.rotation.x = -.07;
+    group.updateMatrixWorld();
+    points.forEach((point, index) => {
+      projected.copy(point).applyMatrix4(group.matrixWorld);
+      // The point normal faces the camera when P · (camera - P) is positive.
+      const marker = markers[index];
+      marker.visible = projected.dot(camera.position) > point.lengthSq() + 1;
+      projected.project(camera);
+      marker.x = (1 + projected.x) * size.width / 2;
+      marker.y = (1 - projected.y) * size.height / 2;
+    });
+
+    const placed = occupied.current;
+    placed.length = 0;
+    markers.forEach(({ x, y, visible }, index) => {
+      const label = labels.current[index];
+      if (!label) return;
+      const width = Number(label.dataset.width);
+      const height = Number(label.dataset.height);
+      if (!visible || !width || !height) {
+        label.style.visibility = "hidden";
+        return;
+      }
+
+      // Try either side of the marker before shifting vertically. Each label
+      // keeps a leader to its own marker, including in the crowded Gulf region.
+      for (const dy of labelOffsets) {
+        for (const direction of [1, -1]) {
+          const dx = direction * (dy === 0 ? 10 : 16);
+          const candidate = { x: x + dx - (direction < 0 ? width : 0), y: y + dy - height / 2, width, height };
+          if (candidate.x < 4 || candidate.x + width > size.width - 4
+            || candidate.y < 4 || candidate.y + height > size.height - 4
+            || placed.some((other) => overlaps(candidate, other))
+            || markers.some((other, otherIndex) => otherIndex !== index && other.visible
+              && overlaps(candidate, { x: other.x - 3, y: other.y - 3, width: 6, height: 6 }))) continue;
+
+          placed.push(candidate);
+          label.style.transform = "translate3d(" + candidate.x + "px," + candidate.y + "px,0)";
+          label.style.setProperty("--leader-start", direction > 0 ? "0%" : "100%");
+          label.style.setProperty("--leader-length", Math.hypot(dx, dy) + "px");
+          label.style.setProperty("--leader-angle", Math.atan2(-dy, -dx) + "rad");
+          label.style.visibility = "visible";
+          return;
+        }
+      }
+      label.style.visibility = "hidden";
+    });
     const reveal = reducedMotion ? 1 : Math.min(1, time / 1.5);
     routes.forEach((_, index) => {
       const material = routeMaterials.current[index];
@@ -132,6 +191,7 @@ function InvalidateBridge({ register }: { register: (invalidate: () => void) => 
 
 export default function GlobeScene(props: Props) {
   const control = useRef<RotationControl>({ yaw: -1, velocity: 0, dragging: false, resumeAt: 0, autoBlend: 1 });
+  const labels = useRef<Array<HTMLDivElement | null>>([]);
   const pointer = useRef<{ id: number; x: number; y: number; time: number; horizontal: boolean } | null>(null);
   const invalidate = useRef<() => void>(() => {});
   const [dragging, setDragging] = useState(false);
@@ -140,6 +200,18 @@ export default function GlobeScene(props: Props) {
   const dark = props.dark;
   const registerInvalidate = useCallback((fn: () => void) => { invalidate.current = fn; }, []);
   const getControl = useCallback(() => control.current, []);
+  useEffect(() => {
+    const observer = new ResizeObserver((entries) => {
+      for (const { target } of entries) {
+        const label = target as HTMLDivElement;
+        label.dataset.width = String(label.offsetWidth);
+        label.dataset.height = String(label.offsetHeight);
+      }
+      invalidate.current();
+    });
+    labels.current.forEach((label) => { if (label) observer.observe(label); });
+    return () => observer.disconnect();
+  }, []);
   useEffect(() => {
     const update = () => {
       setMobile(window.innerWidth < 768);
@@ -202,7 +274,7 @@ export default function GlobeScene(props: Props) {
   return <div className="globe-input" data-dragging={dragging} role="group" tabIndex={0}
     aria-label="Interactive globe. Drag left or right, or use arrow keys to rotate."
     onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={pointerEnd} onPointerCancel={pointerEnd} onKeyDown={onKeyDown}>
-  <Canvas className="globe-canvas" dpr={mobile ? [1, 1.2] : [1, 1.5]}
+  <Canvas className="globe-canvas" style={{ touchAction: "pan-y pinch-zoom" }} dpr={mobile ? [1, 1.2] : [1, 1.5]}
     frameloop={!props.active || props.reducedMotion ? "demand" : "always"}
     camera={{ position: [0, .05, mobile ? 6.25 : tablet ? 6.8 : 5.15], fov: 39, near: .1, far: 20 }}
     gl={{ alpha: true, antialias: !mobile, powerPreference: "high-performance" }}>
@@ -210,7 +282,12 @@ export default function GlobeScene(props: Props) {
     <ambientLight intensity={dark ? 1.25 : 1.4} color={dark ? "#b7dce7" : "#e6eef0"} />
     <directionalLight position={[-3, 3, 5]} intensity={dark ? 1.55 : 1.4} color={dark ? "#9cd5e6" : "#dce9ec"} />
     <directionalLight position={[3, -1, -2]} intensity={.7} color="#2d8fae" />
-    <Suspense fallback={null}><GlobeObject {...props} mobile={mobile} dark={dark} getControl={getControl} select={props.onSelectionChange} /></Suspense>
+    <Suspense fallback={null}><GlobeObject {...props} mobile={mobile} dark={dark} getControl={getControl} select={props.onSelectionChange} labels={labels} /></Suspense>
   </Canvas>
+  <div className="globe-labels" aria-hidden="true">
+    {networkLocations.map(({ name }, index) => (
+      <div className="globe-label" key={name} ref={(label) => { labels.current[index] = label; }}>{name}</div>
+    ))}
+  </div>
   </div>;
 }

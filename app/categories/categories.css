@@ -54,7 +54,6 @@
 .category-detail-visual { position: relative; min-height: 440px; overflow: hidden; background: linear-gradient(145deg,#14516a,#092b3d 48%,#071924); }
 .category-detail-visual .category-art { inset: 0; opacity: 1; mask-image: none; }
 .category-detail-visual::before { content: ""; position: absolute; z-index: 1; inset: 55% 0 0; background: linear-gradient(transparent,#061923ab); pointer-events: none; }
-.category-detail-visual::after { content: "ILLUSTRATIVE INDUSTRY PHOTOGRAPH"; position: absolute; left: 25px; bottom: 23px; color: #def1f1; font-size: 10px; letter-spacing: .13em; }
 .category-detail-actions { display: flex; flex-wrap: wrap; gap: 14px 35px; margin-top: 34px; }
 .category-detail-body { padding-block: var(--section-space-lg); background: var(--surface); }
 .category-detail-heading { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; border-top: 1px solid var(--line); padding-top: 22px; }

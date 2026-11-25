@@ -1,8 +1,11 @@
-export const otherBusinesses = [
+import { siteImage } from "./site-images";
+
+const businessDefaults = [
   { slug: "chemicals", name: "Industrial Chemicals", description: "Our primary business. Supporting manufacturers, traders and industrial buyers with sourcing, supplier coordination, documentation support and international delivery requirements.", features: ["Verified Supply Network", "Documentation Guidance", "Global Trade Support", "Dedicated Point of Contact"], image: "/stock/industrial-refinery.webp", status: "documented" },
   { slug: "footwear", name: "Walkmate Footwear Distribution", description: "Authorized Distribution Partner. Supporting regional distribution and market development for Walkmate footwear products across our operating territory, with a focus on product availability, retail relationships and customer service.", features: ["Authorized Distribution", "Retail Partner Support", "Product Availability", "Market Development"], image: "/stock/footwear-making.webp", status: "documented" },
   { slug: "agro", name: "Agro Commodities", description: "Agricultural trade and sourcing opportunities through producer and supply-chain relationships. Current documented focus areas include roses and pineapples exported direct from Uganda.", features: ["Export Opportunities", "Origin Sourcing", "Supply Coordination", "International Trade Support"], image: "/stock/pineapple-logistics.webp", status: "documented" },
   { slug: "freight-forwarding-and-logistics", name: "Freight Forwarding & Logistics", description: "Shipment coordination, freight solutions and supply-chain support for buyers and exporters.", features: ["Shipment Coordination", "Freight Support", "Export Documentation", "Supply Chain Assistance"], image: "/stock/port-logistics.webp", status: "documented" },
   { slug: "scrap-recycling", name: "Scrap & Recycling", description: "Developing opportunities in material recovery, recycling and sustainable trade through industrial partnerships.", features: ["Resource Recovery", "Sustainable Trade", "Industrial Partnerships", "Supply Chain Development"], image: "/stock/metal-recycling.webp", status: "documented" },
 ] as const;
+export const otherBusinesses = businessDefaults.map(item => ({ ...item, image: siteImage(`business-${item.slug}`, item.image) }));
 export const getBusiness = (slug: string) => otherBusinesses.find(item => item.slug === slug);

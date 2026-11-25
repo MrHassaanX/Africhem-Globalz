@@ -19,7 +19,14 @@
   --type-subsection: clamp(36px, 3.4vw, 58px);
   --type-row: clamp(34px, 3vw, 54px);
   --type-body-large: clamp(18px, 1.3vw, 22px);
-  --type-body: clamp(16px, 1.15vw, 19px);
+  --type-body: clamp(1rem, .96rem + .2vw, 1.125rem);
+  --type-ui: .9375rem;
+  --type-label: .875rem;
+  --type-caption: .8125rem;
+  --body-leading: 1.65;
+  --section-heading-gap: clamp(1.5rem, 2.6vw, 2.75rem);
+  --card-gap: clamp(1rem, 1.8vw, 1.75rem);
+  --card-padding: clamp(1.25rem, 2vw, 2rem);
   --section-space-xl: clamp(100px, 7.2vw, 140px);
   --section-space-lg: clamp(80px, 6.2vw, 116px);
   --section-space-md: clamp(64px, 5vw, 96px);
@@ -28,10 +35,10 @@
 }
 @media (max-width: 767px) {
   :root {
-    --section-space-xl: 88px;
-    --section-space-lg: 80px;
-    --section-space-md: 72px;
-    --section-space-sm: 56px;
+    --section-space-xl: 5.5rem;
+    --section-space-lg: 4.75rem;
+    --section-space-md: 3.75rem;
+    --section-space-sm: 2.75rem;
   }
 }
 [data-theme="dark"] {

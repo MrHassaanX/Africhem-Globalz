@@ -1,4 +1,5 @@
 // Public product names requested in the current Website content document.
+import { siteImage } from "./site-images";
 export type ChemicalDocument = {
   type: "COA" | "TDS" | "SDS";
   title: string;
@@ -24,7 +25,7 @@ export type ChemicalProduct = {
   documents: readonly ChemicalDocument[];
 };
 
-export const chemicalFamilies = [
+const familyDefaults = [
   { slug: "petrochemicals", name: "Petrochemicals", description: "Share the petrochemical material, quantity and destination. Our team will help clarify the sourcing requirement.", image: "/stock/industrial-tanks-sunset.webp" },
   { slug: "polymers", name: "Polymers", description: "Tell us the polymer and application you are looking for, along with your quantity and destination.", image: "/materials/mineral-crystal.webp" },
   { slug: "industrial-chemicals", name: "Industrial Chemicals", description: "Discuss industrial chemical requirements, documentation and delivery considerations with our team.", image: "/materials/chemical-transfer.webp" },
@@ -32,6 +33,7 @@ export const chemicalFamilies = [
   { slug: "specialty-chemicals", name: "Specialty Chemicals", description: "Share your product application and specification so we can discuss relevant sourcing options.", image: "/stock/industrial-refinery.webp" },
   { slug: "custom-sourcing", name: "Custom Sourcing Requests", description: "Can't find your product? Share the specification and destination to start a sourcing conversation.", image: "/stock/port-logistics.webp" },
 ] as const;
+export const chemicalFamilies = familyDefaults.map(item => ({ ...item, image: siteImage(`category-${item.slug}`, item.image) }));
 
 export type ChemicalFamilySlug = (typeof chemicalFamilies)[number]["slug"];
 export const getChemicalFamily = (slug: string) => chemicalFamilies.find(family => family.slug === slug);

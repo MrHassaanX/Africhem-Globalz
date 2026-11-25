@@ -96,7 +96,6 @@ export function ProductDeck({ products, label = "Products catalogue", categoryLa
         return <li className="products-card" data-status={product.status} key={product.id}>
           <div className="products-card-art" data-visual={index + 1}>
             {product.image ? <Image src={product.image} alt="" fill sizes="(max-width: 767px) 92vw, 50vw" loading={index === 0 ? "eager" : "lazy"} /> : categoryVisual && <CategoryArtwork visual={categoryVisual} />}
-            <span className="products-art-caption">{product.image?.startsWith("/stock/") || (!product.image && categoryVisual) ? "ILLUSTRATIVE INDUSTRY PHOTOGRAPH" : "ILLUSTRATIVE MATERIAL STUDY"}</span>
           </div>
           <div className="products-card-content">
             <div className="products-card-top"><span className="products-card-number">{String(index + 1).padStart(2, "0")} / {String(products.length).padStart(2, "0")}</span><span>{named ? product.category.toUpperCase() : categoryLabel?.toUpperCase() ?? "PRODUCTS & MATERIALS"}</span></div>

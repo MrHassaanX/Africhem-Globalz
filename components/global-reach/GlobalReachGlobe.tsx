@@ -14,9 +14,7 @@ class GlobeBoundary extends Component<{ children: React.ReactNode }, { failed: b
 }
 
 export function GlobalReachGlobe() {
-  const journey = useRef<HTMLElement>(null);
   const stage = useRef<HTMLDivElement>(null);
-  const intro = useRef<HTMLDivElement>(null);
   const [painted, setPainted] = useState(false);
   const [dark, setDark] = useState(() => typeof document !== "undefined" && document.documentElement.dataset.theme === "dark");
   const theme = useRef(dark ? "dark" : "light");
@@ -58,52 +56,22 @@ export function GlobalReachGlobe() {
     return () => { observer.disconnect(); document.removeEventListener("visibilitychange", update); };
   }, []);
 
-  useEffect(() => {
-    if (reducedMotion || !journey.current || !intro.current) return;
-    let disposed = false;
-    let revert: (() => void) | undefined;
-    let responsive: { add: (query: string, callback: () => void) => unknown; revert: () => void } | undefined;
-    async function animate() {
-      const [{ gsap }, { ScrollTrigger }] = await Promise.all([import("gsap"), import("gsap/ScrollTrigger")]);
-      if (disposed || !journey.current) return;
-      gsap.registerPlugin(ScrollTrigger);
-      const context = gsap.context(() => {
-        responsive = gsap.matchMedia();
-        responsive.add("(min-width: 768px)", () => {
-          const timeline = gsap.timeline({ scrollTrigger: {
-            trigger: journey.current,
-            start: "top top",
-            end: () => `+=${Math.round(Math.min(window.innerHeight * .52, 520))}`,
-            scrub: .65,
-            invalidateOnRefresh: true,
-          } });
-          timeline.to(intro.current, { opacity: 0, y: -45, ease: "none", duration: .35 }, 0);
-          timeline.to(stage.current, { xPercent: () => window.innerWidth < 1100 ? -50 : -46.153846, ease: "none", duration: .6 }, .4);
-        });
-      }, journey.current);
-      revert = () => { responsive?.revert(); context.revert(); };
-    }
-    void animate().catch(() => { /* The unanimated layout remains readable. */ });
-    return () => { disposed = true; revert?.(); };
-  }, [reducedMotion]);
-
-  return <section className="reach-globe-journey" ref={journey} id="network-globe" aria-labelledby="reach-title">
-    <div className="reach-globe-sticky">
-      <div className="reach-globe-meta"><span>AFRICHEM GLOBALZ / GLOBAL REACH</span><span>DRAG TO EXPLORE ↔</span></div>
-      <div className="reach-globe-intro" ref={intro}>
-        <p>INDIA / SIX INTERNATIONAL PARTNER MARKETS</p>
-        <h1 id="reach-title">GLOBAL<br /><span>REACH.</span></h1>
-        <strong>International trade is built on relationships. Our network connects buyers and business partners across Asia, Africa, the Middle East and Europe.</strong>
-        <a className="reach-globe-cue" href="#reach-partners">Explore our network <span aria-hidden="true">↔</span></a>
+  return <section className="reach-globe-journey" id="network-globe" aria-labelledby="reach-title">
+    <div className="reach-globe-layout">
+      <div className="reach-globe-intro">
+        <h1 id="reach-title">GLOBAL<br />{" "}<span>REACH.</span></h1>
+        <p className="reach-globe-summary">From our base in India, we connect buyers and business partners across Asia, Africa, the Middle East and Europe.</p>
+        <a className="reach-globe-cue" href="#reach-partners">Explore our markets <span aria-hidden="true">↓</span></a>
+        <div className="reach-globe-hud">
+          <div className="globe-selection" aria-live="polite">{selected === null ? "Drag the globe or select a marker." : <><span>{networkLocations[selected].primary ? "Operating base" : "Partner market"}</span><strong>{networkLocations[selected].name}</strong></>}</div>
+        </div>
       </div>
       <div ref={stage} className="reach-globe-stage globe-stage" data-painted={painted}>
         <div className="globe-atmosphere" aria-hidden="true" />
         <div className="globe-preview" aria-hidden="true" />
         <GlobeBoundary><GlobeScene dark={dark} active={active} reducedMotion={reducedMotion} onSelectionChange={setSelected} /></GlobeBoundary>
       </div>
-      <div className="reach-globe-hud">
-        <div className="globe-selection" aria-live="polite">{selected === null ? "SELECT A POINT TO EXPLORE" : <><span>{networkLocations[selected].primary ? "PRIMARY COUNTRY · LAST EXPLORED" : "PARTNER COUNTRY · LAST EXPLORED"}</span><strong>{networkLocations[selected].name}</strong></>}</div>
-      </div>
+      <p className="reach-globe-caption">Markers show our operating base and partner markets. Arcs illustrate business relationships and do not represent shipping routes or office locations.</p>
     </div>
   </section>;
 }

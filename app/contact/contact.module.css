@@ -1,0 +1,124 @@
+.page > :global(.revision-hero),
+.page > :global(.revision-section),
+.page > :global(.contact-principle),
+.page > :global(.revision-closing) {
+  padding-block: clamp(26px, 3.5vw, 54px);
+}
+
+.page :global(.revision-hero) h1 {
+  max-width: 26ch;
+  margin-block: 12px;
+  font-size: clamp(2rem, 4.1vw, 3.5rem);
+}
+
+.page :global(.revision-hero) > p:not(:global(.revision-kicker)) {
+  margin-bottom: 14px;
+  font-size: var(--type-body);
+}
+
+.page :global(.quote-layout),
+.support {
+  display: grid;
+  align-items: start;
+  gap: clamp(18px, 3vw, 42px);
+}
+
+.page :global(.quote-layout) h2 {
+  margin-block: 8px 12px;
+}
+
+.page :global(.revision-section-head) {
+  margin-bottom: 16px;
+}
+
+.support > div {
+  min-width: 0;
+}
+
+.support :global(.contact-links) {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: 8px;
+}
+
+.support :global(.contact-links) a {
+  min-height: 48px;
+  padding: 9px 12px;
+}
+
+.support svg,
+.page :global(.closing-contact) svg {
+  flex-shrink: 0;
+}
+
+.support :global(.what-next) {
+  margin-top: 0;
+  padding: clamp(16px, 2vw, 24px);
+}
+
+.support :global(.what-next) h3,
+.support :global(.contact-identity) h3,
+.values h3 {
+  margin: 0 0 6px;
+  font: 680 1.25rem/1.2 var(--font-display), sans-serif;
+}
+
+.support :global(.what-next) ol {
+  margin-top: 8px;
+}
+
+.support :global(.what-next) li {
+  margin-block: 4px;
+}
+
+.support :global(.what-next-note) {
+  margin-top: 12px;
+  padding-top: 10px;
+}
+
+.support :global(.contact-identity) {
+  margin-top: 16px;
+}
+
+.values {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: 12px;
+}
+
+.values > div {
+  padding: 16px;
+  border: 1px solid var(--line);
+  background: var(--card);
+}
+
+.values p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.page :global(.closing-contact) a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 768px) {
+  .support {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .page :global(.contact-principle) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(24px, 4vw, 64px);
+  }
+
+  .page :global(.contact-principle .revision-section-head) {
+    margin-bottom: 0;
+  }
+}

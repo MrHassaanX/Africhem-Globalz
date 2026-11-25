@@ -1,0 +1,167 @@
+.page .hero h1 {
+  max-width: 24ch;
+  margin-top: 0;
+  text-wrap: pretty;
+}
+
+.heroActions,
+.cardActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 24px;
+}
+
+.heroActions a,
+.cardActions a,
+.network a,
+.detailBack {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--editorial-gap);
+}
+
+.page .cardArt {
+  aspect-ratio: 2.6;
+}
+
+.page .card > .cardBody {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: clamp(20px, 2.7vw, 38px);
+}
+
+.page .card p {
+  max-width: 62ch;
+  margin-bottom: 18px;
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  line-height: 1.6;
+}
+
+.page .features,
+.detail .features {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
+  gap: 8px 20px;
+  margin-bottom: 24px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.features li {
+  display: flex;
+  align-items: baseline;
+}
+
+.cardActions {
+  margin-top: auto;
+}
+
+.logoList {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  margin: 0;
+  padding: clamp(20px, 3vw, 40px);
+  list-style: none;
+  background: #fff;
+}
+
+.logoList li {
+  display: grid;
+  place-items: center;
+}
+
+.logo {
+  position: relative;
+  width: 100%;
+  max-width: 220px;
+  height: clamp(76px, 8.5vw, 120px);
+}
+
+.logo img {
+  object-fit: contain;
+}
+
+.logoList li:nth-child(2) .logo,
+.logoList li:nth-child(5) .logo,
+.logoList li:nth-child(6) .logo {
+  height: clamp(70px, 7.5vw, 106px);
+}
+
+.network {
+  display: grid;
+  grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr);
+  align-items: start;
+  gap: 16px 36px;
+}
+
+.network a {
+  margin-top: 8px;
+}
+
+.detail {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  gap: var(--editorial-gap);
+}
+
+.detail .detailBack {
+  margin-bottom: 12px;
+}
+
+.detail .detailCopy h1 {
+  max-width: none;
+  margin: 0 0 16px;
+}
+
+.detail .detailCopy > p {
+  margin-bottom: 20px;
+}
+
+.detailArt {
+  position: relative;
+  aspect-ratio: 1.4;
+  background: var(--navy);
+}
+
+.detailArt img {
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .page .card:first-child {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-column: 1 / -1;
+  }
+
+  .page .card:first-child .cardArt {
+    min-height: 280px;
+    aspect-ratio: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .cards,
+  .network,
+  .detail {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .logoList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .detailArt {
+    aspect-ratio: 1.8;
+  }
+}

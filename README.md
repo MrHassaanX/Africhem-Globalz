@@ -32,6 +32,10 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) to view the live site. If port 3000 is occupied, Next.js will automatically select an alternate local address. Press `Ctrl + C` to stop the server.
 
+### Local image and product review panel
+
+To review and edit the Home/About hero images, business and category images, or product card images and descriptions, follow the [review panel instructions](tools/review-panel/README.md). Run the site on port 3181 and the separate panel on port 3182. Saved edits are files in your checkout and must be committed for others to see them. The panel does not run in the public Vercel site.
+
 ### Environment Setup
 Environment settings are configured via `.env` files:
 1. Copy the safe configuration template: `cp .env.example .env.local`
